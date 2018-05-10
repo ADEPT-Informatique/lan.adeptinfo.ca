@@ -1,7 +1,7 @@
 # Guide de contribution pour lanadept.com
 
 ## Avant toute chose
-Merci! C'est très apprécié que vous prenieez de votre temps pour contribuer à ce projet. Soyez certain que si vos contributions suivent se guide et son bien faites, vous allez définitivement avoir un impact sur l'expérience de LAN de plusieurs centaines de joueurs. Amusez vous à coder! :)
+Merci! C'est très apprécié que vous preniez de votre temps pour contribuer à ce projet. Soyez certain que si vos contributions suivent se guide et son bien faites, vous allez définitivement avoir un impact sur l'expérience de LAN de plusieurs centaines de joueurs. Amusez vous à coder! :)
 
 ## Architecture générale
 Le projet lanadept.com suit une architecture REST, ce qui signifie que des clients autorisés font des requêtes a une ressource backend séparée qui est appelée un API.
