@@ -8,4 +8,4 @@ Refonte du site du LAN de l'ADEPT.
  - Intégrer des notions vues dans la technique en informatique de gestions.
 
 ## Contribution
-Vous désirez contribuer? Chouette! Assurez vous simplement de lire notre [guide de contribution](https://github.com/ADEPT-Informatique/lan.adeptinfo.ca/blob/master/docs/CONTRIBUTION.md)
+Vous désirez contribuer? Chouette! Assurez vous simplement de lire notre [guide de contribution](https://github.com/ADEPT-Informatique/lan.adeptinfo.ca/blob/master/CONTRIBUTING.md)
