@@ -17,8 +17,8 @@ class CreateTableLan extends Migration
             $table->increments('id');
             $table->dateTime('lan_start');
             $table->dateTime('lan_end');
-            $table->dateTime('reservation_start');
-            $table->dateTime('tournament_start');
+            $table->dateTime('seat_reservation_start');
+            $table->dateTime('tournament_reservation_start');
             $table->string('event_key_id'); // seats.io
             $table->string('public_key_id'); // seats.io
             $table->string('secret_key_id'); // seats.io

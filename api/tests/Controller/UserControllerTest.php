@@ -5,7 +5,7 @@ namespace Tests\Controller;
 use App\Model\User;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Testing\DatabaseMigrations;
-use TestCase;
+use Tests\TestCase;
 
 class UserControllerTest extends TestCase
 {

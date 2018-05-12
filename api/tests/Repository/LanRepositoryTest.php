@@ -1,6 +1,7 @@
 <?php
 
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class LanRepositoryTest extends TestCase
 {
@@ -11,8 +12,8 @@ class LanRepositoryTest extends TestCase
     protected $paramsContent = [
         'lan_start' => "2100-10-11T12:00:00",
         'lan_end' => "2100-10-12T12:00:00",
-        'reservation_start' => "2100-10-04T12:00:00",
-        'tournament_start' => "2100-10-07T00:00:00",
+        'seat_reservation_start' => "2100-10-04T12:00:00",
+        'tournament_reservation_start' => "2100-10-07T00:00:00",
         "event_key_id" => "123456789",
         "public_key_id" => "123456789",
         "secret_key_id" => "123456789",
@@ -30,8 +31,8 @@ class LanRepositoryTest extends TestCase
         $this->lanRepository->createLan(
             new DateTime($this->paramsContent['lan_start']),
             new DateTime($this->paramsContent['lan_end']),
-            new DateTime($this->paramsContent['reservation_start']),
-            new DateTime($this->paramsContent['tournament_start']),
+            new DateTime($this->paramsContent['seat_reservation_start']),
+            new DateTime($this->paramsContent['tournament_reservation_start']),
             $this->paramsContent['event_key_id'],
             $this->paramsContent['public_key_id'],
             $this->paramsContent['secret_key_id'],
@@ -40,8 +41,8 @@ class LanRepositoryTest extends TestCase
         $this->seeInDatabase('lan', [
             'lan_start' => $this->paramsContent['lan_start'],
             'lan_end' => $this->paramsContent['lan_end'],
-            'reservation_start' => $this->paramsContent['reservation_start'],
-            'tournament_start' => $this->paramsContent['tournament_start'],
+            'seat_reservation_start' => $this->paramsContent['seat_reservation_start'],
+            'tournament_reservation_start' => $this->paramsContent['tournament_reservation_start'],
             'event_key_id' => $this->paramsContent['event_key_id'],
             'public_key_id' => $this->paramsContent['public_key_id'],
             'secret_key_id' => $this->paramsContent['secret_key_id'],
@@ -55,8 +56,8 @@ class LanRepositoryTest extends TestCase
         $this->lanRepository->createLan(
             new DateTime($this->paramsContent['lan_start']),
             new DateTime($this->paramsContent['lan_end']),
-            new DateTime($this->paramsContent['reservation_start']),
-            new DateTime($this->paramsContent['tournament_start']),
+            new DateTime($this->paramsContent['seat_reservation_start']),
+            new DateTime($this->paramsContent['tournament_reservation_start']),
             $this->paramsContent['event_key_id'],
             $this->paramsContent['public_key_id'],
             $this->paramsContent['secret_key_id'],
@@ -65,8 +66,8 @@ class LanRepositoryTest extends TestCase
         $this->notSeeInDatabase('lan', [
             'lan_start' => $this->paramsContent['lan_start'],
             'lan_end' => $this->paramsContent['lan_end'],
-            'reservation_start' => $this->paramsContent['reservation_start'],
-            'tournament_start' => $this->paramsContent['tournament_start'],
+            'seat_reservation_start' => $this->paramsContent['seat_reservation_start'],
+            'tournament_reservation_start' => $this->paramsContent['tournament_reservation_start'],
             'event_key_id' => $this->paramsContent['event_key_id'],
             'public_key_id' => $this->paramsContent['public_key_id'],
             'secret_key_id' => $this->paramsContent['secret_key_id'],

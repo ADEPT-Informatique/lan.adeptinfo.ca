@@ -4,6 +4,7 @@ use App\Model\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Testing\DatabaseMigrations;
+use Tests\TestCase;
 
 class UserRepositoryTest extends TestCase
 {

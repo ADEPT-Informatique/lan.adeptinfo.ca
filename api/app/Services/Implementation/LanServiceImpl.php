@@ -28,10 +28,10 @@ class LanServiceImpl implements LanService
     public function createLan(Request $input): Lan
     {
         $lanValidator = Validator::make($input->all(), [
-            'lan_start' => 'required|after:reservation_start|after:tournament_start',
+            'lan_start' => 'required|after:seat_reservation_start|after:tournament_reservation_start',
             'lan_end' => 'required|after:lan_start',
-            'reservation_start' => 'required|after_or_equal:now',
-            'tournament_start' => 'required|after_or_equal:now',
+            'seat_reservation_start' => 'required|after_or_equal:now',
+            'tournament_reservation_start' => 'required|after_or_equal:now',
             'event_key_id' => 'required|string|max:255',
             'public_key_id' => 'required|string|max:255',
             'secret_key_id' => 'required|string|max:255',
@@ -46,8 +46,8 @@ class LanServiceImpl implements LanService
         (
             new DateTime($input['lan_start']),
             new DateTime($input['lan_end']),
-            new DateTime($input['reservation_start']),
-            new DateTime($input['tournament_start']),
+            new DateTime($input['seat_reservation_start']),
+            new DateTime($input['tournament_reservation_start']),
             $input['event_key_id'],
             $input['public_key_id'],
             $input['secret_key_id'],

@@ -20,6 +20,9 @@ Cet api représente le backend complet du site web du LAN de l'ADEPT. Il rassemb
 
  - Avec un terminal de commande, se placer à la racine du projet API
  - Exécuter `composer install` (prend un certain temps)
+ - Exécuter `php artisan key:generate`
+ - Exécuter `php artisan migrate`
+ - Exécuter `php artisan passport:install`
  - Exécuter `php -S localhost:8000 -t public`
  - Ouvrir un navigateur à l'URL suivante: [http://localhost:8000](http://localhost:8000)
 
