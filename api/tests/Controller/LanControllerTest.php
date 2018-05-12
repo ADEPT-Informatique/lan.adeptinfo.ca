@@ -1,7 +1,6 @@
 <?php
 
 use Laravel\Lumen\Testing\DatabaseMigrations;
-use Tests\TestCase;
 
 class LanControllerTest extends TestCase
 {
@@ -10,8 +9,8 @@ class LanControllerTest extends TestCase
     protected $requestContent = [
         'lan_start' => "2100-10-11T12:00:00",
         'lan_end' => "2100-10-12T12:00:00",
-        'seat_reservation_start' => "2100-10-04T12:00:00",
-        'tournament_reservation_start' => "2100-10-07T00:00:00",
+        'reservation_start' => "2100-10-04T12:00:00",
+        'tournament_start' => "2100-10-07T00:00:00",
         "event_key_id" => "123456789",
         "public_key_id" => "123456789",
         "secret_key_id" => "123456789",
@@ -26,8 +25,8 @@ class LanControllerTest extends TestCase
             ->seeJsonEquals([
                 'lan_start' => $this->requestContent['lan_start'],
                 'lan_end' => $this->requestContent['lan_end'],
-                'seat_reservation_start' => $this->requestContent['seat_reservation_start'],
-                'tournament_reservation_start' => $this->requestContent['tournament_reservation_start'],
+                'reservation_start' => $this->requestContent['reservation_start'],
+                'tournament_start' => $this->requestContent['tournament_start'],
                 "event_key_id" => $this->requestContent['event_key_id'],
                 "public_key_id" => $this->requestContent['public_key_id'],
                 "secret_key_id" => $this->requestContent['secret_key_id'],
@@ -65,13 +64,13 @@ class LanControllerTest extends TestCase
     {
         $user = factory('App\Model\User')->make();
         // Set the lan_start date to one day before reservation
-        $newLanStart = (new DateTime($this->requestContent['seat_reservation_start']));
+        $newLanStart = (new DateTime($this->requestContent['reservation_start']));
         $newLanStart->sub(new DateInterval('P1D'));
         $this->requestContent['lan_start'] = $newLanStart->format('Y-m-d\TH:i:s');
-        // Set the tournament_reservation_start to one day before the new lan_start
+        // Set the tournament_start to one day before the new lan_start
         $newTournamentStart = (new DateTime($this->requestContent['lan_start']));
         $newTournamentStart->sub(new DateInterval('P1D'));
-        $this->requestContent['tournament_reservation_start'] = $newTournamentStart->format('Y-m-d\TH:i:s');
+        $this->requestContent['tournament_start'] = $newTournamentStart->format('Y-m-d\TH:i:s');
         // Execute request
         $this->actingAs($user)
             ->json('POST', '/api/lan', $this->requestContent)
@@ -80,7 +79,7 @@ class LanControllerTest extends TestCase
                 'status' => 400,
                 'message' => [
                     'lan_start' => [
-                        0 => 'The lan start must be a date after seat reservation start.',
+                        0 => 'The lan start must be a date after reservation start.',
                     ],
                 ]
             ])
@@ -94,13 +93,13 @@ class LanControllerTest extends TestCase
     {
         $user = factory('App\Model\User')->make();
         // Set the lan_start date to one day before tournament start
-        $newLanStart = (new DateTime($this->requestContent['tournament_reservation_start']));
+        $newLanStart = (new DateTime($this->requestContent['tournament_start']));
         $newLanStart->sub(new DateInterval('P1D'));
         $this->requestContent['lan_start'] = $newLanStart->format('Y-m-d\TH:i:s');
-        // Set the seat_reservation_start to one day before the new lan_start
+        // Set the reservation_start to one day before the new lan_start
         $newTournamentStart = (new DateTime($this->requestContent['lan_start']));
         $newTournamentStart->sub(new DateInterval('P1D'));
-        $this->requestContent['seat_reservation_start'] = $newTournamentStart->format('Y-m-d\TH:i:s');
+        $this->requestContent['reservation_start'] = $newTournamentStart->format('Y-m-d\TH:i:s');
         // Execute request
         $this->actingAs($user)
             ->json('POST', '/api/lan', $this->requestContent)
@@ -109,7 +108,7 @@ class LanControllerTest extends TestCase
                 'status' => 400,
                 'message' => [
                     'lan_start' => [
-                        0 => 'The lan start must be a date after tournament reservation start.',
+                        0 => 'The lan start must be a date after tournament start.',
                     ],
                 ]
             ])
@@ -167,15 +166,15 @@ class LanControllerTest extends TestCase
     public function testCreateLanReservationStartRequiredConstraint()
     {
         $user = factory('App\Model\User')->make();
-        $this->requestContent['seat_reservation_start'] = '';
+        $this->requestContent['reservation_start'] = '';
         $this->actingAs($user)
             ->json('POST', '/api/lan', $this->requestContent)
             ->seeJsonEquals([
                 'success' => false,
                 'status' => 400,
                 'message' => [
-                    'seat_reservation_start' => [
-                        0 => 'The seat reservation start field is required.',
+                    'reservation_start' => [
+                        0 => 'The reservation start field is required.',
                     ],
                 ]
             ])
@@ -188,10 +187,10 @@ class LanControllerTest extends TestCase
     public function testCreateLanReservationStartAfterOrEqualNowConstraint()
     {
         $user = factory('App\Model\User')->make();
-        // Set the seat reservation date to yesterday
-        $newSeatReservationDate = (new DateTime());
-        $newSeatReservationDate->sub(new DateInterval('P1D'));
-        $this->requestContent['seat_reservation_start'] = $newSeatReservationDate->format('Y-m-d\TH:i:s');
+        // Set the reservation date to yesterday
+        $newReservationDate = (new DateTime());
+        $newReservationDate->sub(new DateInterval('P1D'));
+        $this->requestContent['reservation_start'] = $newReservationDate->format('Y-m-d\TH:i:s');
         // Execute request
         $this->actingAs($user)
             ->json('POST', '/api/lan', $this->requestContent)
@@ -199,8 +198,8 @@ class LanControllerTest extends TestCase
                 'success' => false,
                 'status' => 400,
                 'message' => [
-                    'seat_reservation_start' => [
-                        0 => 'The seat reservation start must be a date after or equal to now.',
+                    'reservation_start' => [
+                        0 => 'The reservation start must be a date after or equal to now.',
                     ],
                 ]
             ])
@@ -213,15 +212,15 @@ class LanControllerTest extends TestCase
     public function testCreateLanTournamentStartRequiredConstraint()
     {
         $user = factory('App\Model\User')->make();
-        $this->requestContent['tournament_reservation_start'] = '';
+        $this->requestContent['tournament_start'] = '';
         $this->actingAs($user)
             ->json('POST', '/api/lan', $this->requestContent)
             ->seeJsonEquals([
                 'success' => false,
                 'status' => 400,
                 'message' => [
-                    'tournament_reservation_start' => [
-                        0 => 'The tournament reservation start field is required.',
+                    'tournament_start' => [
+                        0 => 'The tournament start field is required.',
                     ],
                 ]
             ])
@@ -237,7 +236,7 @@ class LanControllerTest extends TestCase
         // Set the reservation date to yesterday
         $newReservationDate = (new DateTime());
         $newReservationDate->sub(new DateInterval('P1D'));
-        $this->requestContent['tournament_reservation_start'] = $newReservationDate->format('Y-m-d\TH:i:s');
+        $this->requestContent['tournament_start'] = $newReservationDate->format('Y-m-d\TH:i:s');
         // Execute request
         $this->actingAs($user)
             ->json('POST', '/api/lan', $this->requestContent)
@@ -245,8 +244,8 @@ class LanControllerTest extends TestCase
                 'success' => false,
                 'status' => 400,
                 'message' => [
-                    'tournament_reservation_start' => [
-                        0 => 'The tournament reservation start must be a date after or equal to now.',
+                    'tournament_start' => [
+                        0 => 'The tournament start must be a date after or equal to now.',
                     ],
                 ]
             ])

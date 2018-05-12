@@ -38,13 +38,4 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password', 'id', 'created_at', 'updated_at',
     ];
-
-    public function lan()
-    {
-        return $this->belongsToMany(Lan::class, 'reservation')
-            ->using(Reservation::class)
-            ->as('reservation')
-            ->withPivot('seat_id')
-            ->withTimestamps();
-    }
 }

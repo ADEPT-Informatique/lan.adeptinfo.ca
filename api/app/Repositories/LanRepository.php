@@ -12,13 +12,11 @@ interface LanRepository
     public function createLan(
         DateTime $lanStart,
         DateTime $lanEnd,
-        DateTime $seatReservationStart,
-        DateTime $tournamentReservationStart,
+        DateTime $reservationStart,
+        DateTime $tournamentStart,
         string $eventKeyId,
         string $publicKeyId,
         string $secretKeyId,
         int $price
     ): Lan;
-
-    public function findLanById(int $id): ?Lan;
 }
