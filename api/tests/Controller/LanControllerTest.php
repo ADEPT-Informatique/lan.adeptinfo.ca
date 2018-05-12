@@ -32,7 +32,7 @@ class LanControllerTest extends TestCase
                 "public_key_id" => $this->requestContent['public_key_id'],
                 "secret_key_id" => $this->requestContent['secret_key_id'],
                 "price" => $this->requestContent['price'],
-                "id" => 1
+                "id" => "1"
             ])
             ->assertResponseStatus(201);
     }
