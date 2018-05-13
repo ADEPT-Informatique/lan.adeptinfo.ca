@@ -7,7 +7,6 @@ namespace App\Repositories\Implementation;
 use App\Model\Lan;
 use App\Repositories\LanRepository;
 use DateTime;
-use Illuminate\Contracts\Auth\Authenticatable;
 
 class LanRepositoryImpl implements LanRepository
 {
@@ -31,7 +30,7 @@ class LanRepositoryImpl implements LanRepository
         $lan->event_key_id = $eventKeyId;
         $lan->public_key_id = $publicKeyId;
         $lan->secret_key_id = $secretKeyId;
-        $lan->price = $price;
+        $lan->price = intval($price);
         $lan->save();
 
         return $lan;
