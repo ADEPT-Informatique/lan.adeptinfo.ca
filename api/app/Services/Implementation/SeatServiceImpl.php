@@ -105,6 +105,6 @@ class SeatServiceImpl implements SeatService
         $this->seatRepository->attachLanUser($user, $lan, $seatId);
 
         // return the reservation
-        return $this->seatRepository->findReservationByLanIdAndUserId(intval($lan->id), $user->id);
+        return $this->seatRepository->findReservationByLanIdAndUserId($lan->id, $user->id);
     }
 }

@@ -22,7 +22,7 @@ class SeatControllerTest extends SeatsTestCase
             ->json('POST', '/api/lan/' . $lan->id . '/book/' . $this->requestContent['seat_id'])
             ->seeJsonEquals([
                 "lan_id" => $lan->id,
-                "seat_id" => $this->requestContent['seat_id']
+                "seat_id" => intval($this->requestContent['seat_id'])
             ])
             ->assertResponseStatus(201);
     }
