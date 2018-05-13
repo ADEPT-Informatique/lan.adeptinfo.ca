@@ -16,3 +16,6 @@ script:
 addons:
     apt:
       update: true
+
+services:
+  - mysql:latest
