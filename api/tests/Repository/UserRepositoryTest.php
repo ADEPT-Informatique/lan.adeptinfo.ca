@@ -1,8 +1,5 @@
 <?php
 
-use App\Model\User;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Hash;
 use Laravel\Lumen\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -39,25 +36,4 @@ class UserRepositoryTest extends TestCase
             'email' => $this->paramsContent['email'],
         ]);
     }
-
-    public function testSignUpUniqueEmailConstraint()
-    {
-        $user = new User();
-        $user->first_name = $this->paramsContent['first_name'];
-        $user->last_name = $this->paramsContent['last_name'];
-        $user->email = $this->paramsContent['email'];
-        $user->password = Hash::make($this->paramsContent['password']);
-        $user->save();
-        try {
-            $this->userRepository->createUser(
-                $this->paramsContent['first_name'],
-                $this->paramsContent['last_name'],
-                $this->paramsContent['email'],
-                $this->paramsContent['password']
-            );
-        } catch (QueryException $e){
-            $this->assertContains('Duplicate entry \'' . $this->paramsContent['email'] . '\'', $e->getMessage());
-        }
-    }
-
 }
