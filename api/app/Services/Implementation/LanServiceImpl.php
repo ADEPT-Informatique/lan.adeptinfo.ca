@@ -51,7 +51,7 @@ class LanServiceImpl implements LanService
             $input['event_key_id'],
             $input['public_key_id'],
             $input['secret_key_id'],
-            $input['price']
+            intval($input['price'])
         );
     }
 }
