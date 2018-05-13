@@ -29,6 +29,8 @@ class Lan extends Model
         'created_at', 'updated_at',
     ];
 
+    protected $casts = [ 'id' => 'integer'];
+
     public function user()
     {
         return $this->belongsToMany(User::class, 'reservation')
