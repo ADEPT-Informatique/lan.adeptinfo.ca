@@ -6,6 +6,7 @@ use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 /**
+ * @property int id
  * @property DateTime lan_start
  * @property DateTime lan_end
  * @property DateTime seat_reservation_start
