@@ -23,4 +23,6 @@ class Reservation extends Pivot
     protected $hidden = [
         'user_id', 'created_at', 'updated_at',
     ];
+
+    protected $casts = ['lan_id' => 'integer'];
 }
