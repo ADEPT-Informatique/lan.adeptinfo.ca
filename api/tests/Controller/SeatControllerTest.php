@@ -21,8 +21,8 @@ class SeatControllerTest extends SeatsTestCase
         $this->actingAs($user)
             ->json('POST', '/api/lan/' . $lan->id . '/book/' . $this->requestContent['seat_id'])
             ->seeJsonEquals([
-                "lan_id" => $lan->id,
-                "seat_id" => intval($this->requestContent['seat_id'])
+                "lan_id" => intval($lan->id),
+                "seat_id" => $this->requestContent['seat_id']
             ])
             ->assertResponseStatus(201);
     }
