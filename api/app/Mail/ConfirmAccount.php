@@ -13,8 +13,8 @@ use Illuminate\Queue\SerializesModels;
  */
 class ConfirmAccount extends Mailable
 {
-    use Queueable, SerializesModels;
-
+    use Queueable;
+    use SerializesModels;
     /**
      * Adresse où le courriel sera envoyé.
      *
