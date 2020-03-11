@@ -1,0 +1,27 @@
+version: '2.0'
+
+# Définit le service de base de données.
+# Utilisé dans :
+# - docker-compose.prod.yml: tester que l'environnement de production fonctionne
+# - docker-compose.dev.yml: développer et tester l'application
+
+services:
+
+  lumen:
+    links:
+      - mariadb
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mariadb
+    environment:
+      MYSQL_USER: lanadept
+      MYSQL_PASSWORD: lanadept
+      MYSQL_DATABASE: lanadept
+      MYSQL_ROOT_PASSWORD: lanadept
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

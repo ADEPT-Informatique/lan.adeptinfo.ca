@@ -1,0 +1,17 @@
+version: '2.0'
+
+# Devrais être utilisé avec docker-compose.yml.
+# Monte l'application dans les containers avec des volumes.
+
+services:
+
+  lumen:
+    tty: True
+    volumes:
+      - ./api:/opt/lanadept-website/api
+    command: |
+      bash -c "bash -s <<EOF
+      cd /opt/lanadept-website/api && \
+      php artisan key:generate
+      php artisan migrate
+      EOF"

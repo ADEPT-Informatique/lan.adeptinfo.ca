@@ -1,0 +1,19 @@
+version: '2.0'
+
+# Création des containers à la base de l'applicationh
+# La variable d'environnement LANADEPT_WEBSITE_PORT dans Makefile doit être définie.
+
+services:
+#  nginx:
+#    build: docker/nginx
+#    image: lanadept-website/nginx
+#    links:
+#      - lumen
+#    depends_on:
+#      - lumen
+#    ports:
+#      - ${LANADEPT_WEBSITE_PORT}:80
+
+  lumen:
+    build: docker/lumen
+    image: lanadept-website/lumen
