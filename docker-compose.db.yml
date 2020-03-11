@@ -8,20 +8,30 @@ version: '2.0'
 services:
 
   lumen:
-    links:
-      - mariadb
     depends_on:
       - mariadb
+    networks:
+      - db
 
   mariadb:
     image: mariadb
+    ports:
+      - "3306:3306"
+    tty: true
     environment:
       MYSQL_USER: lanadept
       MYSQL_PASSWORD: lanadept
       MYSQL_DATABASE: lanadept
       MYSQL_ROOT_PASSWORD: lanadept
+      SERVICE_NAME: mariadb
     volumes:
       - db_data:/var/lib/mysql
+    networks:
+      - db
 
 volumes:
   db_data:
+
+networks:
+  db:
+    driver: bridge
