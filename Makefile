@@ -50,3 +50,11 @@ docker-kill-all:
 .PHONY: docker-run-dev
 docker-run-dev: docker-kill-all docker-build-dev
 	docker-compose $(docker_compose_dev_files_args) up ${DOCKER_COMPOSE_ARGS}
+
+.PHONY: docker-rm-all
+docker-rm-all: docker-kill-all
+	docker-compose $(docker_compose_dev_files_args) rm -v -f
+
+.PHONY: clean-db
+clean-db: docker-rm-all docker-kill-all
+	docker volume rm -f lanadeptinfoca_db_data
