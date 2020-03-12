@@ -14,5 +14,9 @@ services:
       /opt/wait-for-it/wait-for-it.sh --timeout=0 mariadb:3306 && \
       cd /opt/lanadept-website/api && \
       php artisan key:generate && \
-      php artisan migrate
+      php artisan migrate --force && \
+      php artisan passport:install && \
+      php artisan lan:permissions && \
+      php artisan lan:roles && \
+      php artisan lan:general-admin
       EOF"
