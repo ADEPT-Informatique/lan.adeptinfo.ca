@@ -11,7 +11,8 @@ services:
       - ./api:/opt/lanadept-website/api
     command: |
       bash -c "bash -s <<EOF
+      /opt/wait-for-it/wait-for-it.sh --timeout=0 mariadb:3306 && \
       cd /opt/lanadept-website/api && \
-      php artisan key:generate
+      php artisan key:generate && \
       php artisan migrate
       EOF"

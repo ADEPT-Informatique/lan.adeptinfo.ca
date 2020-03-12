@@ -1,8 +1,9 @@
+# Docker
 
-client-admin/projects/core/src/lib/params\.ts
+docker/*/wait-for-it
 
-clients/projects/client-admin/src/environments/environment\.ts
-
-clients/projects/client-user/src/environments/environment\.ts
-
-clients/projects/core/src/lib/params\.ts
+# Angular
+client-admin/projects/core/src/lib/params.ts
+clients/projects/client-admin/src/environments/environment.ts
+clients/projects/client-user/src/environments/environment.ts
+clients/projects/core/src/lib/params.ts
