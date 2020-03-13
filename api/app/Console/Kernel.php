@@ -16,12 +16,13 @@ class Kernel extends ConsoleKernel
         Commands\GeneratePermissions::class,
         Commands\GenerateGlobalRoles::class,
         Commands\GenerateGeneralAdmin::class,
+        Commands\InstallPassport::class,
     ];
 
     /**
      * Planification des commandes à exécuter.
      *
-     * @param \Illuminate\Console\Scheduling\Schedule $schedule
+     * @param Schedule $schedule
      *
      * @return void
      */

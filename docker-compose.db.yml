@@ -12,11 +12,16 @@ services:
       - mariadb
     networks:
       - db
+    environment:
+      DB_DATABASE: lanadept
+      DB_CONNECTION: mysql
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_USERNAME: root
+      DB_PASSWORD: lanadept
 
   mariadb:
     image: mariadb
-    ports:
-      - "3306:3306"
     tty: true
     environment:
       MYSQL_USER: lanadept

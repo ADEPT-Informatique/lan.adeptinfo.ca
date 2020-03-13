@@ -16,19 +16,26 @@
 ## Lumen ##
 ###########
 
-.PHONY: docker-composer
-composer/vendor: api/composer.json
+.PHONY: docker-composer-install
+install-composer/vendor: api/composer.json
 	docker run --rm -i --tty \
 	  -u $$(id -u):$$(id -g) \
       -v $$(pwd)/api:/app \
       composer install
+
+.PHONY: docker-composer-update
+update-composer/vendor: api/composer.json
+	docker run --rm -i --tty \
+	  -u $$(id -u):$$(id -g) \
+      -v $$(pwd)/api:/app \
+      composer update
 
 ####################
 ## Docker targets ##
 ####################
 
 # Définition du port à utiliser pour l'API.
-ifeq ($(LANDEPT_WEBSITE_PORT),)
+ifeq ($(LANADEPT_WEBSITE_PORT),)
 export LANADEPT_WEBSITE_PORT = 8000
 endif
 
@@ -40,7 +47,7 @@ prepare-docker-build:
 	cp -r tools/wait-for-it docker/lumen
 
 .PHONY: docker-build-dev
-docker-build-dev: docker-kill-all prepare-docker-build composer/vendor
+docker-build-dev: docker-kill-all prepare-docker-build install-composer/vendor
 	docker-compose $(docker_compose_dev_files_args) build
 
 .PHONY: docker-kill-all

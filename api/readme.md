@@ -168,7 +168,7 @@ Les configurations de la VM sont déjà dans le projet, à la racine sous `Vagra
  - Configuration de la fenêtre Get new access token (Sous la section `Authorization` d'une des requêtes, le lien `lanadept.com`, le bouton `get new access token` 
     - Token name: `Lumen`
     - Grant Type: `Password Credential`
-    - Access Token URL `{{server-address}}/api/oauth/token`
+    - Access Token URL `{{server-address}}/oauth/token`
     - Username: `karl.marx@unite.org`
     - Password: `Passw0rd!`
     - Client ID: `2`

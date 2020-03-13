@@ -5,18 +5,20 @@ version: '2.0'
 
 services:
 
-  lumen:
-    tty: True
-    volumes:
-      - ./api:/opt/lanadept-website/api
+  nginx:
+    ports:
+      - ${LANADEPT_WEBSITE_PORT}:80
     command: |
       bash -c "bash -s <<EOF
-      /opt/wait-for-it/wait-for-it.sh --timeout=0 mariadb:3306 && \
-      cd /opt/lanadept-website/api && \
-      php artisan key:generate && \
-      php artisan migrate --force && \
-      php artisan passport:install && \
-      php artisan lan:permissions && \
-      php artisan lan:roles && \
-      php artisan lan:general-admin
+      /opt/wait-for-it/wait-for-it.sh --timeout=0 lumen:9000 && \
+      nginx -g \"daemon off;\"
       EOF"
+
+  lumen:
+    tty: true
+    volumes:
+      - ./api:/var/www/html:rw
+
+  mariadb:
+    ports:
+      - "3306:3306"

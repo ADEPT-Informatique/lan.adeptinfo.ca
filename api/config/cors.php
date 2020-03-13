@@ -10,10 +10,10 @@ return [
     | to accept any value.
     |
     */
-    'supportsCredentials' => false,
-    'allowedOrigins'      => ['*'],
-    'allowedHeaders'      => ['Content-Type', 'Authorization'],
-    'allowedMethods'      => ['GET', 'POST', 'PUT',  'DELETE'],
-    'exposedHeaders'      => [],
-    'maxAge'              => 0,
+    'supports_credentials' => false,
+    'allowed_origins' => ['*'],
+    'allowed_headers' => ['Content-Type', 'Authorization'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'DELETE'],
+    'exposed_headers' => [],
+    'max_age' => 0,
 ];

@@ -61,7 +61,8 @@ class GenerateGlobalRoles extends Command
 
         // Afficher un résumé des rôles qui ont été créés
         $bar->finish();
-        $this->line('');
+        $this->line("");
+        $this->line("");
         $this->info('Rôles globaux par défaut générés.');
         $headers = ['id', 'name'];
         $roles = json_decode(json_encode(
