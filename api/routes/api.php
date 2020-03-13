@@ -22,6 +22,9 @@ $api->version('v1', function ($api) {
         // Requêtes ne nécessitants pas d'être authentifié
         $api->group(['namespace' => 'App\Http\Controllers'], function ($api) {
 
+            // Test
+            $api->get('', 'TestController@base');
+
             // Utilisateur
             $api->post('user', 'UserController@signUp');
             $api->post('user/facebook', 'UserController@signInFacebook');
