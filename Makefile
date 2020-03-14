@@ -35,8 +35,8 @@ update-composer/vendor: api/composer.json
 ####################
 
 # Définition du port à utiliser pour l'API.
-ifeq ($(LANADEPT_WEBSITE_PORT),)
-export LANADEPT_WEBSITE_PORT = 8000
+ifeq ($(LANADEPT_API_PORT),)
+export LANADEPT_API_PORT = 8000
 endif
 
 docker_compose_dev_files_args = -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.db.yml

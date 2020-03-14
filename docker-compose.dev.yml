@@ -7,17 +7,19 @@ services:
 
   nginx:
     ports:
-      - ${LANADEPT_WEBSITE_PORT}:80
+      - ${LANADEPT_API_PORT}:8000
     command: |
       bash -c "bash -s <<EOF
       /opt/wait-for-it/wait-for-it.sh --timeout=0 lumen:9000 && \
       nginx -g \"daemon off;\"
       EOF"
+    volumes:
+      - ./api/public:/opt/lanadept/lumen/public
 
   lumen:
     tty: true
     volumes:
-      - ./api:/var/www/html:rw
+      - ./api:/opt/lanadept/lumen:rw
 
   mariadb:
     ports:

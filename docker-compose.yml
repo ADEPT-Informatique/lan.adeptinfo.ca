@@ -1,15 +1,13 @@
 version: '2.0'
 
 # Création des containers à la base de l'applicationh
-# La variable d'environnement LANADEPT_WEBSITE_PORT dans Makefile doit être définie.
+# La variable d'environnement LANADEPT_API_PORT dans Makefile doit être définie.
 
 services:
   nginx:
     build: docker/nginx
     networks:
       - lumen
-    volumes:
-      - ./api/public:/var/www/html/public
 
   lumen:
     build: docker/lumen
@@ -17,7 +15,7 @@ services:
     command: |
       bash -c "bash -s <<EOF
       /opt/wait-for-it/wait-for-it.sh --timeout=0 mariadb:3306 && \
-      cd /var/www/html && \
+      cd /opt/lanadept/lumen && \
       php artisan key:generate && \
       php artisan migrate && \
       php artisan docker:passport && \
