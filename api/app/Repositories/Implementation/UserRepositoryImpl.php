@@ -85,8 +85,10 @@ class UserRepositoryImpl implements UserRepository
     public function createUser(
         string $firstName,
         string $lastName,
-        string $email, string $password,
-        string $confirmationCode): int
+        string $email,
+        string $password,
+        string $confirmationCode
+    ): int
     {
         return DB::table('user')
             ->insertGetId([

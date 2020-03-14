@@ -94,7 +94,8 @@ class ContributionController extends Controller
                 new OneOfTwoFields($request->input('user_full_name'), 'user_full_name'),
             ],
             'permission' => new HasPermissionInLanContributionCategory(
-                $request->input('contribution_category_id'), Auth::id()
+                $request->input('contribution_category_id'),
+                Auth::id()
             ),
         ]);
 
@@ -122,7 +123,8 @@ class ContributionController extends Controller
         ], [
             'contribution_category_id' => 'required|integer|exists:contribution_category,id,deleted_at,NULL',
             'permission'               => new HasPermissionInLanContributionCategory(
-                $request->input('contribution_category_id'), Auth::id()
+                $request->input('contribution_category_id'),
+                Auth::id()
             ),
         ]);
 

@@ -56,7 +56,8 @@ class RemoveOrganizerTest extends TestCase
             ->json(
                 'DELETE',
                 'http://'.env('API_DOMAIN').'/tournament/'.$this->tournament->id.'/organizer',
-                ['email' => $this->organizer->email])
+                ['email' => $this->organizer->email]
+            )
             ->seeJsonEquals([
                 'id'               => $this->tournament->id,
                 'name'             => $this->tournament->name,
@@ -75,7 +76,8 @@ class RemoveOrganizerTest extends TestCase
             ->json(
                 'DELETE',
                 'http://'.env('API_DOMAIN').'/tournament/'.$this->tournament->id.'/organizer',
-                ['email' => $this->organizer->email])
+                ['email' => $this->organizer->email]
+            )
             ->seeJsonEquals([
                 'id'               => $this->tournament->id,
                 'name'             => $this->tournament->name,
@@ -94,7 +96,8 @@ class RemoveOrganizerTest extends TestCase
             ->json(
                 'DELETE',
                 'http://'.env('API_DOMAIN').'/tournament/'.-1 .'/organizer',
-                ['email' => $this->organizer->email])
+                ['email' => $this->organizer->email]
+            )
             ->seeJsonEquals([
                 'success' => false,
                 'status'  => 400,

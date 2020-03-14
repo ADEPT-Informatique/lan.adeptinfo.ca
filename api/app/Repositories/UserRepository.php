@@ -96,8 +96,10 @@ interface UserRepository
     public function createUser(
         string $firstName,
         string $lastName,
-        string $email, string $password,
-        string $confirmationCode): int;
+        string $email,
+        string $password,
+        string $confirmationCode
+    ): int;
 
     /**
      * Supprimer un utilisateur.

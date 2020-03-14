@@ -12,7 +12,8 @@ class DingoServiceProvider extends LumenServiceProvider
         $this->app->singleton('api.exception', function ($app) {
             return new ExceptionHandler(
                 $app['Illuminate\Contracts\Debug\ExceptionHandler'],
-                $this->config('errorFormat'), $this->config('debug')
+                $this->config('errorFormat'),
+                $this->config('debug')
             );
         });
     }
