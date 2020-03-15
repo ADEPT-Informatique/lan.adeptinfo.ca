@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Lan} from 'core';
-import {UserService} from 'core';
-import {LanService} from 'core';
-import {MatDialog} from '@angular/material';
+import {Lan, LanService, UserService} from 'core';
 import {CreateLanComponent} from '../lan/create-lan/create-lan.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-landing',

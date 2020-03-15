@@ -2,15 +2,27 @@
 ##  Angular  ##
 ###############
 
-#angular/node_modules: angular/package.json
-#	docker run --rm -t -u $$(id -u):$$(id -g) \
-#		-v $$(pwd)/angular:/opt/angular \
-#		-w /opt/angular node:9 \
-#		yarn install
+.PHONY: docker-run-clients
+docker-run-clients: install-node-first ng-build-core install-node-second
 
+install-node-first: clients/projects
+	docker run --rm -t -u $$(id -u):$$(id -g) \
+		-v $$(pwd)/clients:/opt/lanadept/clients \
+		-w /opt/lanadept/clients node:10 \
+		npm install
 
+ng-build-core: clients/projects
+	docker run --rm -t -u $$(id -u):$$(id -g) \
+		-v $$(pwd)/clients:/opt/lanadept/clients \
+		-w /opt/lanadept/clients \
+		node:10 \
+		bash -c "/opt/lanadept/clients/node_modules/@angular/cli/bin/ng build core"
 
-
+install-node-second: clients
+	docker run --rm -t -u $$(id -u):$$(id -g) \
+		-v $$(pwd)/clients:/opt/lanadept/clients \
+		-w /opt/lanadept/clients node:10 \
+		npm install
 
 ###########
 ## Lumen ##
@@ -47,7 +59,7 @@ prepare-docker-build:
 	cp -r tools/wait-for-it docker/lumen
 
 .PHONY: docker-build-dev
-docker-build-dev: docker-kill-all prepare-docker-build install-composer/vendor
+docker-build-dev: docker-kill-all prepare-docker-build install-composer/vendor docker-run-clients
 	docker-compose $(docker_compose_dev_files_args) build
 
 .PHONY: docker-kill-all
