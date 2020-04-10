@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules\Seat;
+namespace App\Rules\Seat\SeatsIo;
 
 use App\Model\Lan;
 use Illuminate\Contracts\Validation\Rule;
@@ -8,16 +8,16 @@ use Seatsio\SeatsioClient;
 use Seatsio\SeatsioException;
 
 /**
- * Un siège ne possède pas l'état "booked" pour un certain LAN, dans l'API seats.io.
+ * Un siège ne possède pas l'état "arrivé" pour un certain LAN, dans l'API seats.io.
  *
- * Class SeatNotBookedSeatIo
+ * Class SeatNotArrivedSeatIo
  */
-class SeatNotBookedSeatIo implements Rule
+class SeatNotArrivedSeatIo implements Rule
 {
     protected $lanId;
 
     /**
-     * SeatNotBookedSeatIo constructor.
+     * SeatNotArrivedSeatIo constructor.
      *
      * @param string|null $lanId Id du LAN
      */
@@ -39,12 +39,12 @@ class SeatNotBookedSeatIo implements Rule
         $lan = Lan::find($this->lanId);
 
         /*
-        * Condition de garde
-        * Un LAN correspond à l'id de LAN passé
-        * L'id du LAN est un entier
-        * L'id du siège est une chaîne de caractères
-        */
-        if (is_null($lan) || !is_int($this->lanId) || !is_string($seatId)) {
+         * Condition de garde
+         * Un LAN correspond à l'id de LAN passé
+         * L'id du LAN est un entier
+         * L'id du siège est une chaîne de caractères
+         */
+        if (!is_int($this->lanId) || is_null($lan) || !is_string($seatId)) {
             return true; // Une autre validation devrait échouer
         }
 
@@ -54,8 +54,8 @@ class SeatNotBookedSeatIo implements Rule
             // Demander à l'API de retrouver le siège pour l'événement du LAN, pour l'id du siège
             $status = $seatsClient->events->retrieveObjectStatus($lan->event_key, $seatId);
 
-            // Vérifier que le statut n'est pas à "booked"
-            return $status->status != 'booked';
+            // Vérifier que le statut n'est pas à "arrived"
+            return $status->status != 'arrived';
         } catch (SeatsioException $exception) {
             // Si aucun siège n'est trouvé, l'API retourne une erreur
             // Une autre validation devrait échouer
@@ -70,6 +70,6 @@ class SeatNotBookedSeatIo implements Rule
      */
     public function message(): string
     {
-        return trans('validation.seat_not_booked_seat_io');
+        return trans('validation.seat_not_arrived_seat_io');
     }
 }

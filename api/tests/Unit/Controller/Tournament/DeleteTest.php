@@ -31,9 +31,9 @@ class DeleteTest extends TestCase
         $startTime = Carbon::parse($this->lan->lan_start);
         $endTime = Carbon::parse($this->lan->lan_end);
         $this->tournament = factory('App\Model\Tournament')->create([
-            'lan_id'           => $this->lan->id,
-            'tournament_start' => $startTime->addHour(1),
-            'tournament_end'   => $endTime->subHour(1),
+            'lan_id' => $this->lan->id,
+            'tournament_start' => $startTime->addHour(0),
+            'tournament_end' => $endTime->subHour(),
         ]);
 
         $this->addLanPermissionToUser(

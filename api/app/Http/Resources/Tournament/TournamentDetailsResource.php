@@ -5,14 +5,14 @@ namespace App\Http\Resources\Tournament;
 use App\Http\Resources\Team\GetTournamentDetailsTeamResource;
 use App\Model\TagTeam;
 use App\Model\Team;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Request;
 
 class TournamentDetailsResource extends Resource
 {
     /**
      * Transformer la ressource en tableau.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
@@ -44,17 +44,17 @@ class TournamentDetailsResource extends Resource
         });
 
         return [
-            'id'               => intval($this->id),
-            'name'             => $this->name,
-            'rules'            => $this->rules,
-            'price'            => intval($this->price),
+            'id' => intval($this->id),
+            'name' => $this->name,
+            'rules' => $this->rules,
+            'price' => intval($this->price),
             'tournament_start' => date('Y-m-d H:i:s', strtotime($this->tournament_start)),
-            'tournament_end'   => date('Y-m-d H:i:s', strtotime($this->tournament_end)),
-            'teams_to_reach'   => intval($this->teams_to_reach),
-            'teams_reached'    => $teamsReached,
+            'tournament_end' => date('Y-m-d H:i:s', strtotime($this->tournament_end)),
+            'teams_to_reach' => intval($this->teams_to_reach),
+            'teams_reached' => $teamsReached,
             'players_to_reach' => intval($this->players_to_reach),
-            'state'            => $this->getCurrentState(),
-            'teams'            => GetTournamentDetailsTeamResource::collection($teams),
+            'state' => $this->getCurrentState(),
+            'teams' => GetTournamentDetailsTeamResource::collection($teams),
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules\Seat;
+namespace App\Rules\Seat\SeatsIo;
 
 use App\Model\Lan;
 use Illuminate\Contracts\Validation\Rule;
@@ -8,18 +8,18 @@ use Seatsio\SeatsioClient;
 use Seatsio\SeatsioException;
 
 /**
- * Un siège existe dans l'API seats.io pour certain LAN.
+ * Un siège ne possède pas l'état "free" pour un certain LAN, dans l'API seats.io.
  *
- * Class SeatExistInLanSeatIo
+ * Class SeatNotFreeSeatIo
  */
-class SeatExistInLanSeatIo implements Rule
+class SeatNotFreeSeatIo implements Rule
 {
     protected $lanId;
 
     /**
-     * SeatOncePerLan constructor.
+     * SeatNotFreeSeatIo constructor.
      *
-     * @param null $lanId Id du LAN
+     * @param string|null $lanId Id du LAN
      */
     public function __construct($lanId)
     {
@@ -30,21 +30,21 @@ class SeatExistInLanSeatIo implements Rule
      * Déterminer si la règle de validation passe.
      *
      * @param string $attribute
-     * @param string $seatId    Id du siège
+     * @param string $seatId
      *
      * @return bool
      */
     public function passes($attribute, $seatId): bool
     {
-        $lan = null;
+        $lan = Lan::find($this->lanId);
 
         /*
-         * Condition de garde :
+         * Condition de garde
          * Un LAN correspond à l'id de LAN passé
-         * L'id du LAN est un entier
-         * L'id du siège est une chaîne de caractère
+        * L'id du LAN est un entier
+        * L'id du siège est une chaîne de caractères
          */
-        if (!is_string($seatId) || !is_int($this->lanId) || is_null($lan = Lan::find($this->lanId))) {
+        if (is_null($lan) || !is_int($this->lanId) || !is_string($seatId)) {
             return true; // Une autre validation devrait échouer
         }
 
@@ -52,13 +52,15 @@ class SeatExistInLanSeatIo implements Rule
 
         try {
             // Demander à l'API de retrouver le siège pour l'événement du LAN, pour l'id du siège
-            $seatsClient->events->retrieveObjectStatus($lan->event_key, $seatId);
-        } catch (SeatsioException $exception) {
-            // Une erreur est lancée si aucun siège n'est trouvé
-            return false;
-        }
+            $status = $seatsClient->events->retrieveObjectStatus($lan->event_key, $seatId);
 
-        return true;
+            // Vérifier que le statut n'est pas à "free"
+            return $status->status != 'free';
+        } catch (SeatsioException $exception) {
+            // Si aucun siège n'est trouvé, l'API retourne une erreur
+            // Une autre validation devrait échouer
+            return true;
+        }
     }
 
     /**
@@ -68,6 +70,6 @@ class SeatExistInLanSeatIo implements Rule
      */
     public function message(): string
     {
-        return trans('validation.seat_exist_in_lan_seat_io');
+        return trans('validation.seat_not_free_seat_io');
     }
 }

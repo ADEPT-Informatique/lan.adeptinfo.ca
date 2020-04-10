@@ -34,13 +34,13 @@ class UpdateTest extends TestCase
         $this->lan = factory('App\Model\Lan')->create();
         $this->requestContent['lan_id'] = $this->lan->id;
         $startTime = Carbon::parse($this->lan->lan_start);
-        $this->requestContent['tournament_start'] = $startTime->addHour(1)->format('Y-m-d H:i:s');
+        $this->requestContent['tournament_start'] = $startTime->addHour(0)->format('Y-m-d H:i:s');
         $endTime = Carbon::parse($this->lan->lan_end);
-        $this->requestContent['tournament_end'] = $endTime->subHour(1)->format('Y-m-d H:i:s');
+        $this->requestContent['tournament_end'] = $endTime->subHour()->format('Y-m-d H:i:s');
         $this->tournament = factory('App\Model\Tournament')->create([
-            'lan_id'           => $this->lan->id,
-            'tournament_start' => $startTime->addHour(1),
-            'tournament_end'   => $endTime->subHour(1),
+            'lan_id' => $this->lan->id,
+            'tournament_start' => $startTime->addHour(0),
+            'tournament_end' => $endTime->subHour(),
         ]);
 
         $role = factory('App\Model\LanRole')->create([
@@ -195,12 +195,12 @@ class UpdateTest extends TestCase
     public function testUpdateTournamentStartAfterOrEqualLanStartTime(): void
     {
         $startTime = Carbon::parse($this->lan->lan_start);
-        $this->requestContent['tournament_start'] = $startTime->subHour(1)->format('Y-m-d H:i:s');
+        $this->requestContent['tournament_start'] = $startTime->subHour()->format('Y-m-d H:i:s');
         $this->actingAs($this->user)
-            ->json('PUT', 'http://'.env('API_DOMAIN').'/tournament/'.$this->tournament->id, $this->requestContent)
+            ->json('PUT', 'http://' . env('API_DOMAIN') . '/tournament/' . $this->tournament->id, $this->requestContent)
             ->seeJsonEquals([
                 'success' => false,
-                'status'  => 400,
+                'status' => 400,
                 'message' => [
                     'tournament_start' => [
                         0 => 'The tournament start time must be after or equal the lan start time.',
@@ -213,12 +213,12 @@ class UpdateTest extends TestCase
     public function testUpdateTournamentEndBeforeOrEqualLanEndTime(): void
     {
         $endTime = Carbon::parse($this->lan->lan_end);
-        $this->requestContent['tournament_end'] = $endTime->addHour(1)->format('Y-m-d H:i:s');
+        $this->requestContent['tournament_end'] = $endTime->addHour(0)->format('Y-m-d H:i:s');
         $this->actingAs($this->user)
-            ->json('PUT', 'http://'.env('API_DOMAIN').'/tournament/'.$this->tournament->id, $this->requestContent)
+            ->json('PUT', 'http://' . env('API_DOMAIN') . '/tournament/' . $this->tournament->id, $this->requestContent)
             ->seeJsonEquals([
                 'success' => false,
-                'status'  => 400,
+                'status' => 400,
                 'message' => [
                     'tournament_end' => [
                         0 => 'The tournament end time must be before or equal the lan end time.',

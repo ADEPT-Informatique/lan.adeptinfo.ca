@@ -1,6 +1,6 @@
 FROM nginx:1.16-alpine
 
-RUN apk add --no-cache bash
+RUN apk add --no-cache bash openssl
 
 ADD nginx.conf /etc/nginx/conf.d/default.conf
 

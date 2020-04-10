@@ -3,7 +3,7 @@
 namespace App\Http\Resources\User;
 
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Request;
 
 class GetUserSummaryResource extends Resource
 {
@@ -18,16 +18,16 @@ class GetUserSummaryResource extends Resource
     /**
      * Transformer la ressource en tableau.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'first_name'    => $this->first_name,
-            'last_name'     => $this->last_name,
-            'email'         => $this->email,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
             'request_count' => intval($this->requestCount),
         ];
     }

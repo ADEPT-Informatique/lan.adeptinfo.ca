@@ -33,9 +33,9 @@ class CreateRequestTest extends TestCase
         $startTime = Carbon::parse($this->lan->lan_start);
         $endTime = Carbon::parse($this->lan->lan_end);
         $this->tournament = factory('App\Model\Tournament')->create([
-            'lan_id'           => $this->lan->id,
-            'tournament_start' => $startTime->addHour(1),
-            'tournament_end'   => $endTime->subHour(1),
+            'lan_id' => $this->lan->id,
+            'tournament_start' => $startTime->addHour(0),
+            'tournament_end' => $endTime->subHour(),
         ]);
         $this->team = factory('App\Model\Team')->create([
             'tournament_id' => $this->tournament->id,
@@ -178,9 +178,9 @@ class CreateRequestTest extends TestCase
         $startTime = Carbon::parse($this->lan->lan_start);
         $endTime = Carbon::parse($this->lan->lan_end);
         $tournament = factory('App\Model\Tournament')->create([
-            'lan_id'           => $this->lan->id,
-            'tournament_start' => $startTime->addHour(1),
-            'tournament_end'   => $endTime->subHour(1),
+            'lan_id' => $this->lan->id,
+            'tournament_start' => $startTime->addHour(0),
+            'tournament_end' => $endTime->subHour(),
         ]);
         $this->actingAs($this->user)
             ->json('POST', 'http://'.env('API_DOMAIN').'/team', [

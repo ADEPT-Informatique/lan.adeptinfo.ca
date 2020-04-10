@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start joueur": "ng serve user --port 4200",
-    "start admin": "ng serve admin --port 4201",
+    "start joueur": "ng serve user --port 4200 --ssl",
+    "start admin": "ng serve admin --port 4201 --ssl",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

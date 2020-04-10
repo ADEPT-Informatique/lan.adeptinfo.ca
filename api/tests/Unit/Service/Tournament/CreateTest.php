@@ -36,9 +36,9 @@ class CreateTest extends TestCase
 
         $this->paramsContent['lan_id'] = $this->lan->id;
         $startTime = Carbon::parse($this->lan->lan_start);
-        $this->paramsContent['tournament_start'] = $startTime->addHour(1)->format('Y-m-d H:i:s');
+        $this->paramsContent['tournament_start'] = $startTime->addHour(0)->format('Y-m-d H:i:s');
         $endTime = Carbon::parse($this->lan->lan_end);
-        $this->paramsContent['tournament_end'] = $endTime->subHour(1)->format('Y-m-d H:i:s');
+        $this->paramsContent['tournament_end'] = $endTime->subHour()->format('Y-m-d H:i:s');
     }
 
     public function testCreate(): void

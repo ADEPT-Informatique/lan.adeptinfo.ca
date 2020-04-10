@@ -4,14 +4,14 @@ namespace App\Http\Resources\Tournament;
 
 use App\Model\TagTeam;
 use App\Model\Team;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Request;
 
 class TournamentResource extends Resource
 {
     /**
      * Transformer la ressource en tableau.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
@@ -36,13 +36,13 @@ class TournamentResource extends Resource
         }
 
         return [
-            'id'               => $this->id,
-            'name'             => $this->name,
+            'id' => $this->id,
+            'name' => $this->name,
             'tournament_start' => date('Y-m-d H:i:s', strtotime($this->tournament_start)),
-            'tournament_end'   => date('Y-m-d H:i:s', strtotime($this->tournament_end)),
-            'state'            => $this->getCurrentState(),
-            'teams_reached'    => intval($teamsReached),
-            'teams_to_reach'   => intval($this->teams_to_reach),
+            'tournament_end' => date('Y-m-d H:i:s', strtotime($this->tournament_end)),
+            'state' => $this->getCurrentState(),
+            'teams_reached' => intval($teamsReached),
+            'teams_to_reach' => intval($this->teams_to_reach),
         ];
     }
 }

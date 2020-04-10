@@ -5,7 +5,7 @@ namespace App\Http\Resources\User;
 use App\Http\Resources\Reservation\GetUserDetailsReservationResource;
 use App\Model\Reservation;
 use App\Model\User;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
 class GetUserDetailsResource extends Resource
@@ -23,15 +23,15 @@ class GetUserDetailsResource extends Resource
     /**
      * Transformer la ressource en tableau.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
     public function toArray($request)
     {
         return [
-            'full_name'     => $this->getFullName(),
-            'email'         => $this->email,
+            'full_name' => $this->getFullName(),
+            'email' => $this->email,
             'current_place' => $this->currentSeat != null ? $this->currentSeat->seat_id : null,
             'place_history' => GetUserDetailsReservationResource::collection($this->seatHistory),
         ];

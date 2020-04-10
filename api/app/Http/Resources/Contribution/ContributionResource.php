@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Contribution;
 
 use App\Model\User;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Request;
 
 /**
  * @property int id
@@ -15,7 +15,7 @@ class ContributionResource extends Resource
     /**
      * Transformer la ressource en tableau.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
@@ -27,7 +27,7 @@ class ContributionResource extends Resource
             User::find($this->user_id)->getFullName();
 
         return [
-            'id'             => intval($this->id),
+            'id' => intval($this->id),
             'user_full_name' => $userFullName,
         ];
     }

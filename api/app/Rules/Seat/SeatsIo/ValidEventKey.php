@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules\Seat;
+namespace App\Rules\Seat\SeatsIo;
 
 use Illuminate\Contracts\Validation\Rule;
 use Seatsio\SeatsioClient;

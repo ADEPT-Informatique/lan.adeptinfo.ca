@@ -140,7 +140,7 @@ interface TeamRepository
      *
      * @param int $teamId Id de l'équipe.
      *
-     * @return Collection Tags et identité des tags trouvés.
+     * @return Collection Tag et identité des tags trouvés.
      */
     public function getUsersTeamTags(int $teamId): Collection;
 

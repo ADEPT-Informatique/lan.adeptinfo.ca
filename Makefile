@@ -9,7 +9,7 @@ install-node-first: clients/projects
 	docker run --rm -t -u $$(id -u):$$(id -g) \
 		-v $$(pwd)/clients:/opt/lanadept/clients \
 		-w /opt/lanadept/clients node:10 \
-		npm install
+		npm install --ignore-scripts
 
 ng-build-core: clients/projects
 	docker run --rm -t -u $$(id -u):$$(id -g) \
@@ -21,7 +21,7 @@ ng-build-core: clients/projects
 install-node-second: clients
 	docker run --rm -t -u $$(id -u):$$(id -g) \
 		-v $$(pwd)/clients:/opt/lanadept/clients \
-		-w /opt/lanadept/clients node:10 \
+		-w /opt/lanadept/clients/projects/admin node:10 \
 		npm install
 
 ###########
@@ -33,14 +33,14 @@ install-composer/vendor: api/composer.json
 	docker run --rm -i --tty \
 	  -u $$(id -u):$$(id -g) \
       -v $$(pwd)/api:/app \
-      composer install
+      composer install --prefer-source --no-interaction -o
 
 .PHONY: docker-composer-update
 update-composer/vendor: api/composer.json
 	docker run --rm -i --tty \
 	  -u $$(id -u):$$(id -g) \
       -v $$(pwd)/api:/app \
-      composer update
+      composer update --prefer-source --no-interaction -o
 
 ####################
 ## Docker targets ##
@@ -51,12 +51,18 @@ ifeq ($(LANADEPT_API_PORT),)
 export LANADEPT_API_PORT = 8000
 endif
 
+# UID for mapping permissions to disk and running commands.
+ifeq ($(LANADEPT_UID),)
+export LANADEPT_UID = $(shell id -u)
+endif
+
 docker_compose_dev_files_args = -f docker-compose.yml -f docker-compose.dev.yml -f docker-compose.db.yml
 
 .PHONY: prepare-docker-build
 prepare-docker-build:
 	cp -r tools/wait-for-it docker/nginx
 	cp -r tools/wait-for-it docker/lumen
+	cp -r tools/wait-for-it docker/client-admin
 
 .PHONY: docker-build-dev
 docker-build-dev: docker-kill-all prepare-docker-build install-composer/vendor docker-run-clients

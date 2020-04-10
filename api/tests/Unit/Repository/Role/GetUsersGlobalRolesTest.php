@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Repository\User;
+namespace Tests\Unit\Repository\Role;
 
 use App\Model\Permission;
 use Laravel\Lumen\Testing\DatabaseMigrations;

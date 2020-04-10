@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules;
+namespace App\Rules\Role;
 
 use App\Model\LanRoleUser;
 use App\Model\User;

@@ -6,9 +6,10 @@ import {CreateLanSeatsComponent} from './seats/create-lan-seats.component';
 import {CreateLanCoordinatesComponent} from './coordinates/create-lan-coordinates.component';
 import {CreateLanRulesComponent} from './rules/create-lan-rules.component';
 import {CreateLanDescriptionComponent} from './description/create-lan-description.component';
-import {LanService} from 'core';
-import {Lan} from 'core';
+import {Errors, Lan, LanService} from 'core';
 import {DateUtils} from '../../utils/DateUtils';
+import {SwalComponent} from '@sweetalert2/ngx-sweetalert2';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-lan',
@@ -19,6 +20,9 @@ import {DateUtils} from '../../utils/DateUtils';
  * Dialogue de création de LAN.
  */
 export class CreateLanComponent {
+
+  // Les communications avec le serveur sont en cours, l'interface est donc désactivée pendant ce temps
+  isCreatingLan = false;
 
   // Formulaire des détails du LAN
   @ViewChild(CreateLanDetailsComponent) createLanDetailsComponent: CreateLanDetailsComponent;
@@ -38,10 +42,20 @@ export class CreateLanComponent {
   // Surveille la largeur courante de l'écran de l'utilisateur
   mobileQuery: MediaQueryList;
 
+  // Erreurs qui peuvent être retournées par l'API
+  errors: Errors;
+
+  // Index courant du stepper
+  currentIndex = 0;
+
+  // Fenêtre qui confirme à l'utilisateur que le LAN a bien été créé
+  @ViewChild('createLanSuccessSwal') private createLanSuccessSwal: SwalComponent;
+
   constructor(
     private formBuilder: FormBuilder,
     private media: MediaMatcher,
-    private lanService: LanService
+    private lanService: LanService,
+    private router: Router
   ) {
     // Le changement de mobile à plein écran s'effectue lorsque l'écran fait 960 pixels de large
     this.mobileQuery = this.media.matchMedia('(min-width: 960px)');
@@ -101,10 +115,13 @@ export class CreateLanComponent {
 
     this.lanService.createLan(lan).subscribe(
       (data: Lan) => {
-        console.log(data);
+        this.errors = null;
+        this.isCreatingLan = false;
+        // this.createLanSuccessSwal.show().then(() => this.router.navigateByUrl('/'));
       },
-      err => {
-        console.log(err);
+      (err: Errors) => {
+        this.errors = err;
+        this.isCreatingLan = false;
       }
     );
   }

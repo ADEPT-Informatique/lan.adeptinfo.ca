@@ -4,7 +4,7 @@ namespace App\Http\Resources\Team;
 
 use App\Http\Resources\Tag\GetTournamentDetailsTagResource;
 use App\Model\TagTeam;
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GetTournamentDetailsTeamResource extends Resource
@@ -12,7 +12,7 @@ class GetTournamentDetailsTeamResource extends Resource
     /**
      * Transformer la ressource en tableau.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
@@ -44,11 +44,11 @@ class GetTournamentDetailsTeamResource extends Resource
             ->get();
 
         return [
-            'id'              => intval($this->id),
-            'name'            => $this->name,
-            'tag'             => $this->tag,
+            'id' => intval($this->id),
+            'name' => $this->name,
+            'tag' => $this->tag,
             'players_reached' => intval($playersReached),
-            'players'         => GetTournamentDetailsTagResource::collection($players),
+            'players' => GetTournamentDetailsTagResource::collection($players),
         ];
     }
 }

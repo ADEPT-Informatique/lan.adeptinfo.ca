@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules\Role;
+namespace App\Rules\Tournament;
 
 use App\Model\Lan;
 use App\Model\OrganizerTournament;

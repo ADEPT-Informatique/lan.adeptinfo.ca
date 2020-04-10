@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Contribution;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GetContributionsResource extends Resource
@@ -10,7 +10,7 @@ class GetContributionsResource extends Resource
     /**
      * Transformer la ressource en tableau.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
      * @return array
      */
@@ -21,7 +21,7 @@ class GetContributionsResource extends Resource
             ->get();
 
         return [
-            'category_id'   => $this->id,
+            'category_id' => $this->id,
             'category_name' => $this->name,
             'contributions' => ContributionResource::collection($contributions),
         ];

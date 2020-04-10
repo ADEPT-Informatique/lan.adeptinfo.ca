@@ -3,7 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Http\Request;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -12,13 +15,13 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param \Exception $e
-     *
-     * @throws Exception
+     * @param Exception $e
      *
      * @return void
+     * @throws Exception
+     *
      */
-    public function report(Exception $e)
+    public function report($e)
     {
         parent::report($e);
     }
@@ -26,12 +29,13 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Exception               $e
+     * @param Request $request
+     * @param Exception|Throwable $e
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
+     * @throws Throwable
      */
-    public function render($request, Exception $e)
+    public function render($request, Throwable $e)
     {
         return parent::render($request, $e);
     }

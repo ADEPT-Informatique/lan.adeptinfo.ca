@@ -37,13 +37,13 @@ class UpdateTest extends TestCase
         $this->lan = factory('App\Model\Lan')->create();
         $this->paramsContent['lan_id'] = $this->lan->id;
         $startTime = Carbon::parse($this->lan->lan_start);
-        $this->paramsContent['tournament_start'] = $startTime->addHour(1)->format('Y-m-d H:i:s');
+        $this->paramsContent['tournament_start'] = $startTime->addHour(0)->format('Y-m-d H:i:s');
         $endTime = Carbon::parse($this->lan->lan_end);
-        $this->paramsContent['tournament_end'] = $endTime->subHour(1)->format('Y-m-d H:i:s');
+        $this->paramsContent['tournament_end'] = $endTime->subHour()->format('Y-m-d H:i:s');
         $this->tournament = factory('App\Model\Tournament')->create([
-            'lan_id'           => $this->lan->id,
-            'tournament_start' => $startTime->addHour(1),
-            'tournament_end'   => $endTime->subHour(1),
+            'lan_id' => $this->lan->id,
+            'tournament_start' => $startTime->addHour(0),
+            'tournament_end' => $endTime->subHour(),
         ]);
     }
 

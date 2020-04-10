@@ -8,8 +8,17 @@ services:
   nginx:
     ports:
       - ${LANADEPT_API_PORT}:8000
+      - 4201:4201
+      - 4200:4200
+    depends_on:
+      - client-admin
+      - client-player
+    networks:
+      - clients
     command: |
       bash -c "bash -s <<EOF
+      openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt \
+      -subj /C=CA/ST=Quebec/L=Montreal/O=ADEPT-Informatique/CN=www.adeptinfo.ca && \
       /opt/wait-for-it/wait-for-it.sh --timeout=0 lumen:9000 && \
       nginx -g \"daemon off;\"
       EOF"
@@ -24,3 +33,55 @@ services:
   mariadb:
     ports:
       - "3306:3306"
+
+  client-player:
+    build: docker/client-player
+    image: lanadept-website/client-player
+    user: ${LANADEPT_UID}
+    volumes:
+      - ./clients:/opt/lanadept-website/clients
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - clients
+    command: |
+      bash -c 'bash -s <<EOF
+      cd /opt/lanadept-website/clients && \
+      /opt/lanadept-website/clients/node_modules/@angular/cli/bin/ng serve user --port 4200 --host 0.0.0.0 --public-host https://localhost --ssl --disableHostCheck
+      EOF'
+
+  client-admin:
+    build: docker/client-admin
+    image: lanadept-website/client-admin
+    user: ${LANADEPT_UID}
+    volumes:
+      - ./clients:/opt/lanadept-website/clients
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - clients
+    command: |
+      bash -c 'bash -s <<EOF
+      cd /opt/lanadept-website/clients && \
+      /opt/lanadept-website/clients/node_modules/@angular/cli/bin/ng serve admin --port 4201 --host 0.0.0.0 --public-host https://localhost --ssl --disableHostCheck
+      EOF'
+
+  client-core:
+    image: node:10
+    user: ${LANADEPT_UID}
+    volumes:
+      - ./clients:/opt/lanadept-website/clients
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: |
+      bash -c 'bash -s <<EOF
+      cd /opt/lanadept-website/clients && \
+      /opt/lanadept-website/clients/node_modules/@angular/cli/bin/ng build core --watch
+      EOF'
+
+volumes:
+  compiled_clients:
+
+networks:
+  clients:
+    driver: bridge

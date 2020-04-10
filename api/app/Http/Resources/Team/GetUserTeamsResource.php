@@ -5,7 +5,6 @@ namespace App\Http\Resources\Team;
 use App\Model\Request;
 use App\Model\TagTeam;
 use App\Model\Tournament;
-use Illuminate\Http\Resources\Json\Resource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -51,14 +50,14 @@ class GetUserTeamsResource extends Resource
         }
 
         return [
-            'id'               => $this->id,
-            'name'             => $this->name,
-            'tag'              => $this->tag,
-            'players_reached'  => $playersReached,
+            'id' => $this->id,
+            'name' => $this->name,
+            'tag' => $this->tag,
+            'players_reached' => $playersReached,
             'players_to_reach' => intval($tournament->players_to_reach),
-            'tournament_name'  => $tournament->name,
-            'requests'         => $requests,
-            'player_state'     => $playersState,
+            'tournament_name' => $tournament->name,
+            'requests' => $requests,
+            'player_state' => $playersState,
         ];
     }
 }
