@@ -4,9 +4,10 @@ namespace App\Http\Resources\User;
 
 use App\Http\Resources\Role\GetRoleResource;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
 
-class GetAdminRolesResource extends Resource
+class GetAdminRolesResource extends JsonResource
 {
     protected $lanRoles;
 

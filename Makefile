@@ -63,6 +63,7 @@ prepare-docker-build:
 	cp -r tools/wait-for-it docker/nginx
 	cp -r tools/wait-for-it docker/lumen
 	cp -r tools/wait-for-it docker/client-admin
+	cp -r tools/wait-for-it docker/client-player
 
 .PHONY: docker-build-dev
 docker-build-dev: docker-kill-all prepare-docker-build install-composer/vendor docker-run-clients

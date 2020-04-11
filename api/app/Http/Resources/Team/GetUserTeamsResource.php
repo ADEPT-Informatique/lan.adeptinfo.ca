@@ -5,10 +5,11 @@ namespace App\Http\Resources\Team;
 use App\Model\Request;
 use App\Model\TagTeam;
 use App\Model\Tournament;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class GetUserTeamsResource extends Resource
+class GetUserTeamsResource extends JsonResource
 {
     /**
      * Transformer la ressource en tableau.

@@ -19,10 +19,10 @@
     ],
     "paths": {
       "core": [
-        "./node_modules/core"
+        "./dist/core"
       ],
       "core/*": [
-        "./node_modules/core/*"
+        "./dist/core/*"
       ]
     }
   }

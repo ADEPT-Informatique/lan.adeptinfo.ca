@@ -4,8 +4,9 @@ namespace App\Http\Resources\Reservation;
 
 use App\Model\Lan;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetUserDetailsReservationResource extends Resource
+class GetUserDetailsReservationResource extends JsonResource
 {
     /**
      * Transformer la ressource en tableau.

@@ -5,8 +5,9 @@ namespace App\Http\Resources\Lan;
 use App\Utils\DateUtils;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetAllResource extends Resource
+class GetAllResource extends JsonResource
 {
     /**
      * Transformer la ressource en tableau.

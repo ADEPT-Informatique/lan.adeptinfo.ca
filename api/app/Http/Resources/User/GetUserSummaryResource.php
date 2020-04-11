@@ -4,8 +4,9 @@ namespace App\Http\Resources\User;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetUserSummaryResource extends Resource
+class GetUserSummaryResource extends JsonResource
 {
     protected $requestCount;
 

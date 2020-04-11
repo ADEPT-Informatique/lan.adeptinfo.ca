@@ -6,8 +6,9 @@ use App\Http\Resources\Team\GetTournamentDetailsTeamResource;
 use App\Model\TagTeam;
 use App\Model\Team;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class TournamentDetailsResource extends Resource
+class TournamentDetailsResource extends JsonResource
 {
     /**
      * Transformer la ressource en tableau.

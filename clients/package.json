@@ -5,6 +5,7 @@
     "ng": "ng",
     "start joueur": "ng serve user --port 4200 --ssl",
     "start admin": "ng serve admin --port 4201 --ssl",
+    "start core": "ng build core --watch",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

@@ -6,9 +6,10 @@ use App\Http\Resources\Reservation\GetUserDetailsReservationResource;
 use App\Model\Reservation;
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
 
-class GetUserDetailsResource extends Resource
+class GetUserDetailsResource extends JsonResource
 {
     protected $currentSeat;
     protected $seatHistory;

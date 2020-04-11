@@ -27,6 +27,7 @@ services:
 
   lumen:
     tty: true
+    user: ${LANADEPT_UID}
     volumes:
       - ./api:/opt/lanadept/lumen:rw
 

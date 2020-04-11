@@ -4,13 +4,14 @@ namespace App\Http\Resources\Contribution;
 
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @property int id
  * @property string user_full_name
  * @property int user_id
  */
-class ContributionResource extends Resource
+class ContributionResource extends JsonResource
 {
     /**
      * Transformer la ressource en tableau.

@@ -3,8 +3,9 @@
 namespace App\Http\Resources\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class GetUserResource extends Resource
+class GetUserResource extends JsonResource
 {
     /**
      * Transformer la ressource en tableau.

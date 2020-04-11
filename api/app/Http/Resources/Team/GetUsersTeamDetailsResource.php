@@ -6,9 +6,10 @@ use App\Http\Resources\Request\GetAllForTeamResource;
 use App\Http\Resources\Tag\GetUserTagsResource;
 use App\Model\Team;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
 
-class GetUsersTeamDetailsResource extends Resource
+class GetUsersTeamDetailsResource extends JsonResource
 {
     protected $tags;
     protected $requests;

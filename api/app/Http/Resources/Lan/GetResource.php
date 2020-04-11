@@ -4,6 +4,7 @@ namespace App\Http\Resources\Lan;
 
 use App\Model\Lan;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Collection;
 
 /**
@@ -21,7 +22,7 @@ use Illuminate\Support\Collection;
  * @property mixed rules
  * @property mixed description
  */
-class GetResource extends Resource
+class GetResource extends JsonResource
 {
     protected $reservedPlaces;
     protected $images;

@@ -3,8 +3,9 @@
 namespace App\Http\Resources\Contribution;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-class ContributionCategoryResource extends Resource
+class ContributionCategoryResource extends JsonResource
 {
     /**
      * Transformer la ressource en tableau.
