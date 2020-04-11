@@ -27,9 +27,9 @@ export class CreateLanRulesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     // Avant de changer le texte
-    this.textEditor.simpleMDE.codemirror.on('beforeChange', (instance: any, changeObj: any) => {
+    this.textEditor.easyMDE.codemirror.on('beforeChange', (instance: any, changeObj: any) => {
       // Si le texte va être plus long que 20 000 caractère
-      if (this.textEditor.simpleMDE.value().length >= 20000 && changeObj.origin === '+input') {
+      if (this.textEditor.easyMDE.value().length >= 20000 && changeObj.origin === '+input') {
         // Annuler l'édition
         changeObj.cancel();
       }

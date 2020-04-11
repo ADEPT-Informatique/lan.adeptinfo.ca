@@ -48,7 +48,7 @@ services:
     command: |
       bash -c 'bash -s <<EOF
       cd /opt/lanadept-website/clients && \
-      /opt/lanadept-website/clients/node_modules/@angular/cli/bin/ng serve user --port 4200 --host 0.0.0.0 --public-host https://localhost --ssl --disableHostCheck
+      /opt/lanadept-website/clients/node_modules/@angular/cli/bin/ng serve user --port 4200 --host 0.0.0.0 --public-host https://localhost --ssl
       EOF'
 
   client-admin:
@@ -64,7 +64,7 @@ services:
     command: |
       bash -c 'bash -s <<EOF
       cd /opt/lanadept-website/clients && \
-      /opt/lanadept-website/clients/node_modules/@angular/cli/bin/ng serve admin --port 4201 --host 0.0.0.0 --public-host https://localhost --ssl --disableHostCheck
+      /opt/lanadept-website/clients/node_modules/@angular/cli/bin/ng serve admin --port 4201 --host 0.0.0.0 --public-host https://localhost --ssl
       EOF'
 
   client-core:

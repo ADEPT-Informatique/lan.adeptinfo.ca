@@ -19,7 +19,11 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'https://localhost:4200',
+        'https://localhost:4201',
+        'https://adeptinfo.ca',
+    ],
 
     'allowed_origins_patterns' => [],
 
