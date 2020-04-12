@@ -35,13 +35,6 @@ install-composer/vendor: api/composer.json
       -v $$(pwd)/api:/app \
       composer install --prefer-source --no-interaction -o
 
-.PHONY: docker-composer-update
-update-composer/vendor: api/composer.json
-	docker run --rm -i --tty \
-	  -u $$(id -u):$$(id -g) \
-      -v $$(pwd)/api:/app \
-      composer update --prefer-source --no-interaction -o
-
 ####################
 ## Docker targets ##
 ####################

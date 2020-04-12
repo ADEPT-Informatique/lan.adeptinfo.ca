@@ -1,0 +1,61 @@
+docker-run-clients: install-node-first ng-build-core install-node-second
+
+install-node-first: clients/projects
+	docker run --rm -t -u 1000:1000 \
+		-v %cd%/clients:/opt/lanadept/clients \
+		-w /opt/lanadept/clients node:10 \
+		npm install --ignore-scripts
+
+ng-build-core: clients/projects
+	docker run --rm -t -u 1000:1000 \
+		-v %cd%/clients:/opt/lanadept/clients \
+		-w /opt/lanadept/clients \
+		node:10 \
+		bash -c "/opt/lanadept/clients/node_modules/@angular/cli/bin/ng build core"
+
+install-node-second: clients
+	docker run --rm -t -u 1000:1000 \
+		-v %cd%/clients:/opt/lanadept/clients \
+		-w /opt/lanadept/clients/projects/admin node:10 \
+		npm install
+
+############
+### Lumen ##
+############
+
+install-composer/vendor: api/composer.json
+	docker run --rm -i --tty \
+	  -u 1000:1000 \
+      -v %cd%/api:/app \
+      composer install --prefer-source --no-interaction -o
+
+#####################
+### Docker targets ##
+#####################
+
+docker_compose_dev_files_args=-f docker-compose.yml -f docker-compose.db.yml
+
+setenv :
+    set LANADEPT_API_PORT=8000
+    set LANADEPT_UID=1000:1000
+
+prepare-docker-build:
+	XCOPY /I/Y %cd%\tools\wait-for-it %cd%\docker\nginx\wait-for-it
+	XCOPY /I/Y %cd%\tools\wait-for-it %cd%\docker\lumen\wait-for-it
+	XCOPY /I/Y %cd%\tools\wait-for-it %cd%\docker\client-admin\wait-for-it
+	XCOPY /I/Y %cd%\tools\wait-for-it %cd%\docker\client-player\wait-for-it
+
+docker-build-dev: docker-kill-all prepare-docker-build install-composer/vendor docker-run-clients setenv
+	docker-compose $(docker_compose_dev_files_args) build
+
+docker-kill-all: setenv
+	docker-compose $(docker_compose_dev_files_args) kill
+
+docker-run-dev: docker-kill-all docker-build-dev setenv
+	docker-compose $(docker_compose_dev_files_args) up
+
+docker-rm-all: docker-kill-all
+	docker-compose $(docker_compose_dev_files_args) rm -v -f
+
+clean-db: docker-rm-all docker-kill-all
+	docker volume rm -f lanadeptinfoca_db_data
