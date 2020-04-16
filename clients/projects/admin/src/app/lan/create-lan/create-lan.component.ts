@@ -6,9 +6,8 @@ import {CreateLanSeatsComponent} from './seats/create-lan-seats.component';
 import {CreateLanCoordinatesComponent} from './coordinates/create-lan-coordinates.component';
 import {CreateLanRulesComponent} from './rules/create-lan-rules.component';
 import {CreateLanDescriptionComponent} from './description/create-lan-description.component';
-import {LanService} from 'core';
-import {Lan} from 'core';
 import {DateUtils} from '../../utils/DateUtils';
+import { LanService, Lan } from 'projects/core/src/public_api';
 
 @Component({
   selector: 'app-create-lan',

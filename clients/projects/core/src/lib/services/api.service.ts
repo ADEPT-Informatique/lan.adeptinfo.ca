@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {parameters} from '../params';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpHeaders} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 
@@ -54,9 +54,14 @@ export class ApiService {
    * @param baseUrl Url de base de la requête
    */
   post(path: string, body: Object = {}, baseUrl = parameters.apiUrl): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": 'application/json'
+      })
+    };
     return this.http.post(
       baseUrl + path,
-      JSON.stringify(body)
+      JSON.stringify(body),httpOptions
     ).pipe(catchError(ApiService.formatErrors));
   }
 

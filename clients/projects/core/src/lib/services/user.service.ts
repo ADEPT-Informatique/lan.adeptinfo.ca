@@ -1,30 +1,31 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+import { Injectable } from "@angular/core";
+import { BehaviorSubject, Observable, ReplaySubject } from "rxjs";
 
-import {distinctUntilChanged, map} from 'rxjs/operators';
-import {User} from '../models/api/user';
-import {ApiService} from './api.service';
-import {JwtService} from './jwt.service';
-import {parameters} from '../params';
-import {HttpParams} from '@angular/common/http';
+import { distinctUntilChanged, map } from "rxjs/operators";
+import { User } from "../models/api/user";
+import { ApiService } from "./api.service";
+import { JwtService } from "./jwt.service";
+import { parameters } from "../params";
+import { HttpParams } from "@angular/common/http";
+import { Signup } from "../models/api/signup";
 
 @Injectable()
 /**
  * Actions liées aux utilisateur et leur authentification dans l'application.
  */
 export class UserService {
-
   // Observables de l'utilisateur courant
   private currentUserSubject = new BehaviorSubject<User>({} as User);
-  public currentUser = this.currentUserSubject.asObservable().pipe(distinctUntilChanged());
+  public currentUser = this.currentUserSubject
+    .asObservable()
+    .pipe(distinctUntilChanged());
 
   // Observable de l'état de connexion d'un utilisateur
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
-  constructor(
-    private apiService: ApiService) {
-  }
+  constructor(private apiService: ApiService) { }
+
 
   /**
    * Obtenir les détails de l'utilisateur.
@@ -32,21 +33,19 @@ export class UserService {
   populate(lanId?: number): void {
     // Si un JWT existe dans le localstorage, tenter d'obtenir le sommaire de l'utilisateur
     if (JwtService.getToken()) {
-
       const params = new HttpParams();
 
       if (lanId != null) {
-        params.append('lan_id', lanId.toString());
+        params.append("lan_id", lanId.toString());
       }
 
-      this.apiService.get('/admin/summary', params)
-        .subscribe(
-          // Si l'appel est un succès, mettre les données reçues dans l'utilisateur courant
-          data => this.setAuth(data),
+      this.apiService.get("/user/summary", params).subscribe(
+        // Si l'appel est un succès, mettre les données reçues dans l'utilisateur courant
+        data => this.setAuth(data),
 
-          // Si l'appel échoue, supprimer les informations de l'utilisateur pour qu'il s'authentifie à nouveau
-          () => this.purgeAuth()
-        );
+        // Si l'appel échoue, supprimer les informations de l'utilisateur pour qu'il s'authentifie à nouveau
+        () => this.purgeAuth()
+      );
     } else {
       // Retirer ce qui pourait rester dans la mémoire de l'application de l'utilisateur précédent
       this.purgeAuth();
@@ -54,27 +53,37 @@ export class UserService {
   }
 
   /**
+   * Tentative de création d'un compte
+   * @param signupReq
+   */
+  attemptSignup(signupReq: Signup): Observable<any> {
+    return this.apiService.post("/user", signupReq).pipe(
+      map(data => {
+
+      })
+    );
+  }
+
+/**
    * Détails de l'authentification.
    * @param user Utilisateur authentifié
    */
   setAuth(user: User): void {
-
     // Rendre les données de l'utilisateur courant observables
     this.currentUserSubject.next(user);
+    JwtService.saveUser(user);
 
     // Vider la valeur
     this.isAuthenticatedSubject.next();
 
     // Mettre isAuthenticated à true
     this.isAuthenticatedSubject.next(true);
-
   }
 
   /**
    * Supprimer toute traces de l'utilisateur dans le localstorage et dans la mémoire.
    */
   purgeAuth(): void {
-
     // Supprimer le JWT du localstorage
     JwtService.destroyToken();
 
@@ -83,7 +92,6 @@ export class UserService {
 
     // Mettre le statut d'authentification à false
     this.isAuthenticatedSubject.next(false);
-
   }
 
   /**
@@ -91,36 +99,34 @@ export class UserService {
    * @param credentials Informations de l'utilisateur qui tente de se connecter
    */
   attemptAuth(credentials: any): Observable<string> {
-    return this.apiService.post('/oauth/token', {
+    return this.apiService
+      .post("/oauth/token", {
+        // Type d'authentification de l'API
+        grant_type: parameters.grantType,
 
-      // Type d'authentification de l'API
-      grant_type: parameters.grantType,
+        // Id du client d'authentification de l'API
+        client_id: parameters.clientId,
 
-      // Id du client d'authentification de l'API
-      client_id: parameters.clientId,
+        // Mot de passe du client d'authentification de l'API
+        client_secret: parameters.clientSecret,
 
-      // Mot de passe du client d'authentification de l'API
-      client_secret: parameters.clientSecret,
+        // Courriel de l'utilisateur
+        username: credentials.email,
 
-      // Courriel de l'utilisateur
-      username: credentials.email,
-
-      // Mot de passe de l'utilsateur
-      password: credentials.password
-    })
-      .pipe(map(
-        data => {
-
+        // Mot de passe de l'utilsateur
+        password: credentials.password
+      })
+      .pipe(
+        map(data => {
           // Sauvegarder le JWT renvoyé du serveur dans le localstorage
           JwtService.saveToken(data.access_token);
-
           // Obtenir les informations sommaires de l'utilisateur nouvellement connecté
           this.populate();
 
           // Retourner le token d'accès à l'API
           return data.access_token;
-        }
-      ));
+        })
+      );
   }
 
   /**
@@ -128,14 +134,13 @@ export class UserService {
    * @param token Token envoyé par Facebook
    */
   attemptAuthFacebook(token: string): Observable<string> {
-    return this.apiService.post('/user/facebook', {
-
-      // Token envoyé par Facebook
-      access_token: token
-    })
-      .pipe(map(
-        data => {
-
+    return this.apiService
+      .post("/user/facebook", {
+        // Token envoyé par Facebook
+        access_token: token
+      })
+      .pipe(
+        map(data => {
           // Sauvegarder le JWT renvoyé du serveur dans le localstorage
           JwtService.saveToken(data.token);
 
@@ -144,8 +149,8 @@ export class UserService {
 
           // Retourner le token d'accès à l'API
           return data.token;
-        }
-      ));
+        })
+      );
   }
 
   /**
@@ -153,14 +158,13 @@ export class UserService {
    * @param token Token envoyé par Google
    */
   attemptAuthGoogle(token: string): Observable<string> {
-    return this.apiService.post('/user/google', {
-
-      // Token envoyé par Google
-      access_token: token
-    })
-      .pipe(map(
-        data => {
-
+    return this.apiService
+      .post("/user/google", {
+        // Token envoyé par Google
+        access_token: token
+      })
+      .pipe(
+        map(data => {
           // Sauvegarder le JWT renvoyé du serveur dans le localstorage
           JwtService.saveToken(data.token);
 
@@ -169,8 +173,8 @@ export class UserService {
 
           // Retourner le token d'accès à l'API
           return data.token;
-        }
-      ));
+        })
+      );
   }
 
   /**
@@ -178,7 +182,7 @@ export class UserService {
    */
   logout(): void {
     // Envoyer une requête pour supprimer le token dans l'API
-    this.apiService.post('/user/logout', {});
+    this.apiService.post("/user/logout", {});
 
     // Supprimer toute traces de l'utilisateur en local
     this.purgeAuth();
@@ -188,6 +192,20 @@ export class UserService {
    * Obtenir les détails de l'utilisateur courant.
    */
   getCurrentUser(): User {
-    return this.currentUserSubject.value;
+    return JwtService.getUser();
   }
+
+  /**
+   * Verifie si il y a un utilisateur de connecter grace au Token.
+   */
+  isConnected() : boolean {
+    if (JwtService.checkToken()) {
+      return true;
+    }
+    else {
+      //Si il n'y a pas de token l'utilisateur n'a pas comment etre connecté.
+      return false;
+    }
+  }
+
 }

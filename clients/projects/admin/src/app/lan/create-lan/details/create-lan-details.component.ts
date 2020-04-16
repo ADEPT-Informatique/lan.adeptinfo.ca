@@ -1,8 +1,8 @@
+import { TimePickerConfig } from 'amazing-time-picker/src/app/atp-library/definitions';
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {AmazingTimePickerService} from 'amazing-time-picker';
-import {TimePickerConfig} from 'amazing-time-picker/src/app/atp-library/definitions';
 import {DateUtils} from '../../../utils/DateUtils';
+import { AmazingTimePickerService } from 'amazing-time-picker';
 
 @Component({
   selector: 'app-create-lan-details',
@@ -26,7 +26,8 @@ export class CreateLanDetailsComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private timePicker: AmazingTimePickerService) {
+    private timePicker: AmazingTimePickerService
+    ) {
     // Instantiation du formulaire
     this.detailsForm = this.formBuilder.group({
       name: ['LAN de l\'ADEPT - ', [Validators.required, Validators.max(255)]],

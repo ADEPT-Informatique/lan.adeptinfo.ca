@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {UserService} from 'core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {AuthService, FacebookLoginProvider, GoogleLoginProvider} from 'angularx-social-login';
+import { UserService } from 'projects/core/src/public_api';
 
 @Component({
   selector: 'app-auth-page',

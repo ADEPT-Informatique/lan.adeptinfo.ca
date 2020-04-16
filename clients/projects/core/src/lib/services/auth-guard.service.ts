@@ -16,8 +16,8 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
+  ): boolean {
     // Un module n'est disponible que si un utilisateur est connecté
-    return this.userService.isAuthenticated.pipe(take(1));
+    return this.userService.isConnected();
   }
 }

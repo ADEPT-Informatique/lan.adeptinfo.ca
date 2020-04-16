@@ -7,10 +7,10 @@ import {SeatsioAngularModule} from '@seatsio/seatsio-angular';
 import {OwlModule} from 'ngx-owl-carousel';
 import {CreateLanCoordinatesComponent} from './coordinates/create-lan-coordinates.component';
 import {AgmCoreModule} from '@agm/core';
-import {environment} from '../../../environments/environment';
 import {CreateLanRulesComponent} from './rules/create-lan-rules.component';
 import {CreateLanDescriptionComponent} from './description/create-lan-description.component';
 import {CovalentTextEditorModule} from '@covalent/text-editor';
+import { environment } from 'projects/user/src/environments/environment';
 
 @NgModule({
   imports: [
