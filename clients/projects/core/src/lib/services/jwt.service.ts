@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import { User } from '../models/api/user';
 
 @Injectable()
 /**
@@ -24,48 +23,10 @@ export class JwtService {
   }
 
   /**
-   * Verifier si il y a une token dans le localstorage.
-   * 
-   */
-  static checkToken():boolean{
-    return window.localStorage['jwtToken'] != '' && window.localStorage['jwtToken'] != null;
-  }
-
-  /**
    * Supprimer le token d'accès du localstorage.
    */
   static destroyToken(): void {
     window.localStorage.removeItem('jwtToken');
   }
 
-  /**
-   * Obtenir l'utilisateur connecté gardé dans le localstorage.
-   * @return l'utilisateur
-   */
-  static getUser(): User {
-    return JSON.parse(window.localStorage['appUser']);
-  }
-
-  /**
-   * Mettre l'utilisateur connecté dans le localstorage.
-   * @param user L'utilisateur conserver
-   */
-  static saveUser(user: User): void {
-    window.localStorage['appUser'] = JSON.stringify(user);
-  }
-
-  /**
-   * Verifier si il y a une l'utilisateur dans le localstorage.
-   * 
-   */
-  static checkUser():boolean{
-    return window.localStorage['appUser'] != '' || window.localStorage['appUser'] != null;
-  }
-
-  /**
-   * Supprimer l'utilisateur connecté du localstorage.
-   */
-  static destroyUser(): void {
-    window.localStorage.removeItem('appUser');
-  }
 }

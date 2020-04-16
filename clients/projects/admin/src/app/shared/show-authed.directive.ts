@@ -1,5 +1,5 @@
 import {Directive, Input, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
-import { UserService } from 'projects/core/src/public_api';
+import {UserService} from 'core';
 
 @Directive({selector: '[appShowAuthed]'})
 /**

@@ -1,4 +1,3 @@
-import { AmazingTimePickerModule } from 'amazing-time-picker';
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -29,6 +28,7 @@ import {
 } from '@angular/material';
 import {ShowAuthedDirective} from './show-authed.directive';
 import {HasPermissionPipe} from './has-permission.pipe';
+import {AmazingTimePickerModule} from 'amazing-time-picker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
 
@@ -38,24 +38,6 @@ import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatStepperModule,
-    MatToolbarModule,
-    MatTooltipModule,
     RouterModule,
     SweetAlert2Module.forRoot()
   ],

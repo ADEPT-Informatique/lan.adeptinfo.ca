@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { of } from 'rxjs';
-import { Router } from '@angular/router';
-
-import { UserService, LanService, User } from 'projects/core/src/public_api';
-import { environment } from 'projects/user/src/environments/environment';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {MediaMatcher} from '@angular/cdk/layout';
+import {UserService} from 'core';
+import {of} from 'rxjs';
+import {Router} from '@angular/router';
+import {User} from 'core';
+import {LanService} from 'core';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',

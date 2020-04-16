@@ -72,8 +72,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "src/styles.css"
             ],
             "scripts": [],
             "assets": [
@@ -143,8 +142,7 @@
               "projects/user/src/assets"
             ],
             "styles": [
-              "projects/user/src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "projects/user/src/styles.css"
             ],
             "scripts": []
           },
@@ -193,8 +191,7 @@
             "tsConfig": "projects/user/tsconfig.spec.json",
             "karmaConfig": "projects/user/karma.conf.js",
             "styles": [
-              "projects/user/src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "projects/user/src/styles.css"
             ],
             "scripts": [],
             "assets": [
@@ -237,8 +234,7 @@
               "projects/admin/src/assets"
             ],
             "styles": [
-              "projects/admin/src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "projects/admin/src/styles.css"
             ],
             "scripts": []
           },
@@ -287,8 +283,7 @@
             "tsConfig": "projects/admin/tsconfig.spec.json",
             "karmaConfig": "projects/admin/karma.conf.js",
             "styles": [
-              "projects/admin/src/styles.css",
-              "node_modules/ngx-toastr/toastr.css"
+              "projects/admin/src/styles.css"
             ],
             "scripts": [],
             "assets": [
