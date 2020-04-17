@@ -31,10 +31,10 @@ Ce workspace Angular contient 3 projets.
 
 ### Exécuter pour la première fois
 
- - Avec un terminal de commande, se placer à la racine du dossier **core** : `cd clients/projects/core`
+ - Avec un terminal de commande, se placer à la racine du dossier **core** : `cd clients/projects`
  - Exécuter `npm install` (prend un certain temps)
  - Exécuter `ng build core` pour compiler la librairie principale
- - Retourner à la racine du dossier **clients** `cd ../..` :
+ - Retourner à la racine du dossier **clients** `cd ..` :
  - Exécuter un second `npm install` (prend un certain temps)
  - Remplacer le fichier `projects/admin/src/environments/environment.example.ts` par `environment.example.ts` et le fichier `projects/core/src/lib/params.example.ts` par `params.ts`
     - Veuillez contacter un administrateur du projet pour avoir les configurations d'environnement préremplie.

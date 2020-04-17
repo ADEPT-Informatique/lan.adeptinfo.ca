@@ -23,8 +23,7 @@
     <span class="fill-space"></span>
 
     <!-- Bouton du menu déroulant -->
-    <button *ngIf="mobileQuery.matches" mat-button
-            [matMenuTriggerFor]="userMenu">{{currentUser.first_name}}</button>
+    <button *ngIf="mobileQuery.matches" mat-button [matMenuTriggerFor]="userMenu">{{currentUser.first_name}}</button>
 
     <!-- Items de menu du compte de l'utilisateur -->
     <mat-menu #userMenu="matMenu">
@@ -39,8 +38,7 @@
 
   <!--  Navigation mobile -->
   <mat-sidenav-container [style.marginTop.px]="!mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav mode="over"
-                 [fixedInViewport]="!mobileQuery.matches" [fixedTopGap]="56">
+    <mat-sidenav #snav mode="over" [fixedInViewport]="!mobileQuery.matches" [fixedTopGap]="56">
       <mat-nav-list>
 
         <!-- Items de menu de navigation dans l'application -->

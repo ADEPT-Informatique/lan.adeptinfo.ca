@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {UserService} from 'core';
+import { UserService } from 'projects/core/src/public_api';
 
 @Pipe({name: 'HasPermission'})
 /**

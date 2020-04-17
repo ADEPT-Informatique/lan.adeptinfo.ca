@@ -1,0 +1,11 @@
+<div class="container">
+  <table class="table table-light">
+    <tbody>
+      <tr *ngFor="let item of getTournaments()">
+        <th scope="row">Icon</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.tournament_start }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

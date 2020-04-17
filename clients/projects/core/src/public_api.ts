@@ -8,6 +8,7 @@ export * from './lib/services/jwt.service';
 export * from './lib/services/lan.service';
 export * from './lib/services/seat.service';
 export * from './lib/services/user.service';
+export * from './lib/services/tournament.service';
 
 // Models
 export * from './lib/models/api/lan';
