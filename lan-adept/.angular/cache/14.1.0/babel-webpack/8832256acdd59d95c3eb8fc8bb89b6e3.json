@@ -1,0 +1,1 @@
+{"ast":null,"code":"export * from '@firebase/remote-config';","map":{"version":3,"names":[],"sources":["C:/Users/Felix/Desktop/lan.adeptinfo.ca/lan-adept/node_modules/firebase/remote-config/dist/index.esm.js"],"sourcesContent":["export * from '@firebase/remote-config';\n"],"mappings":"AAAA,cAAc,yBAAd"},"metadata":{},"sourceType":"module"}
