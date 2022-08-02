@@ -1,4 +1,5 @@
 using FirebaseAdmin;
+using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,11 +13,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-FirebaseApp.Create(new AppOptions()
+var defaultApp = FirebaseApp.Create(new AppOptions()
 {
     Credential = GoogleCredential.FromFile("../service-account-file.json"),
 });
 
+var defaultAuth = FirebaseAuth.GetAuth(defaultApp);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -27,8 +29,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
