@@ -1,8 +1,17 @@
-﻿namespace api_adept.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace api_adept.Models
 {
-    public class Seat
+    #nullable disable
+    public class Seat: BaseModel
     {
-        #nullable disable
+        public int Number { get; set; }
+
+        [RegularExpression("/^[A-Z]+$/")]
+        public char Section { get; set; }
+        
+        public string Place => $"{Section}{Number}";
+
         public virtual Lan Lan { get; set; }
     }
 }
