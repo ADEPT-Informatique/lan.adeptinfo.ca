@@ -1,8 +1,15 @@
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+var configuration = builder.Configuration;
+
+builder.Services.AddDbContext<AdeptContext>(options =>
+    options.UseSqlServer(configuration.GetConnectionString("AdeptContext") 
+    ?? throw new InvalidOperationException("Connection string 'AdeptContext' not found.")));
 
 // Add services to the container.
 
