@@ -107,5 +107,8 @@
       }
     }
   },
-  "defaultProject": "lan-adept"
+  "defaultProject": "lan-adept",
+  "cli": {
+    "analytics": "cf70f3ce-32b7-4ef7-8322-c17fb4b128dd"
+  }
 }
