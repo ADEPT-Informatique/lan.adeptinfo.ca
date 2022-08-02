@@ -7,9 +7,15 @@
       <ul class="nav-menu sf-js-enabled sf-arrows" style="touch-action: pan-y">
         <li class="menu-active d-block d-sm-none"><a href="#">Accueil</a></li>
         <li><a href="places">Places</a></li>
-        <!--<li *ngIf="!this.userService.isConnected()"><a href="/auth/login">Se connecter</a></li>
-                <li *ngIf="this.userService.isConnected()"><a href="/auth/logout">Se déconnecter</a></li>
-                <li *ngIf="!this.userService.isConnected()"><a href="/auth/register">Création Compte</a></li> -->
+        <li *ngIf="!this.userService.isConnected()">
+          <a href="/auth/login">Se connecter</a>
+        </li>
+        <li *ngIf="this.userService.isConnected()">
+          <a href="/auth/logout">Se déconnecter</a>
+        </li>
+        <li *ngIf="!this.userService.isConnected()">
+          <a href="/auth/register">Création Compte</a>
+        </li>
       </ul>
     </nav>
   </div>

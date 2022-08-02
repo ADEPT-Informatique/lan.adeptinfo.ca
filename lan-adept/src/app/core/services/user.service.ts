@@ -5,5 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
+  public isConnected():boolean{
+    // TODO
+    return true;
+  }
+
   constructor() { }
 }

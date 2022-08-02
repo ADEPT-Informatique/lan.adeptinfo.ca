@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../core/services/user.service';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class SeatsComponent implements OnInit {
     selectedObjectsInputName: 'selectedSeat'
   }
 
-  constructor() { }
+  constructor(public userService:UserService) { }
 
 
   ngOnInit(): void {
