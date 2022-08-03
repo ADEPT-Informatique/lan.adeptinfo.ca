@@ -1,13 +1,17 @@
 ﻿namespace api_adept.Models
 {
-    public class Lan: BaseModel
+    public class Lan : BaseModel
     {
         public DateTime Date { get; set; }
-        public virtual ICollection<Seat> Seats { get; set; }
+        public virtual ISet<Seat> Seats { get; set; }
+        public string Session { get; set; }
 
-        public Lan()
+        protected Lan() { /* Needed for EntityFramework */ }
+
+        public Lan(string session)
         {
             Seats = new HashSet<Seat>();
+            Session = session;
         }
     }
 }

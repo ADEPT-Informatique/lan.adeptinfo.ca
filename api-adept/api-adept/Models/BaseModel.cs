@@ -1,7 +1,10 @@
-﻿namespace api_adept.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace api_adept.Models
 {
     public abstract class BaseModel
     {
-        public int Id { get; protected set; }
+        [Key]
+        public long Id { get; set; }
     }
 }
