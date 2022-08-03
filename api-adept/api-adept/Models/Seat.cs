@@ -2,7 +2,8 @@
 
 namespace api_adept.Models
 {
-    public class Seat : BaseModel
+    public class Seat : BaseModel 
+    {
         public virtual Lan Lan { get; set; }
 
         protected Seat() { /* Needed for EntityFramework */ }

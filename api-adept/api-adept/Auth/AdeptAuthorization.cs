@@ -1,8 +1,5 @@
 ﻿using api_adept.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Policy;
 using System.Net;
-using System.Security.Principal;
 using System.Text;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;

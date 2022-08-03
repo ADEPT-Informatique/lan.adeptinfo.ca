@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using api_adept.Models;
-using Microsoft.AspNetCore.Authorization;
+using api_adept.Context;
 
 namespace api_adept.Controllers
 {
@@ -14,9 +9,9 @@ namespace api_adept.Controllers
     [ApiController]
     public class LansController : ControllerBase
     {
-        private readonly AdeptContext _context;
+        private readonly AdeptLanContext _context;
 
-        public LansController(AdeptContext context)
+        public LansController(AdeptLanContext context)
         {
             _context = context;
         }
@@ -25,22 +20,22 @@ namespace api_adept.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Lan>>> GetLan()
         {
-          if (_context.Lan == null)
+          if (_context.Lans == null)
           {
               return NotFound();
           }
-            return await _context.Lan.ToListAsync();
+            return await _context.Lans.ToListAsync();
         }
 
         // GET: api/Lans/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Lan>> GetLan(int id)
         {
-          if (_context.Lan == null)
+          if (_context.Lans == null)
           {
               return NotFound();
           }
-            var lan = await _context.Lan.FindAsync(id);
+            var lan = await _context.Lans.FindAsync(id);
 
             if (lan == null)
             {
@@ -86,11 +81,11 @@ namespace api_adept.Controllers
         [HttpPost]
         public async Task<ActionResult<Lan>> PostLan(Lan lan)
         {
-          if (_context.Lan == null)
+          if (_context.Lans == null)
           {
               return Problem("Entity set 'AdeptContext.Lan'  is null.");
           }
-            _context.Lan.Add(lan);
+            _context.Lans.Add(lan);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetLan", new { id = lan.Id }, lan);
@@ -100,17 +95,17 @@ namespace api_adept.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLan(int id)
         {
-            if (_context.Lan == null)
+            if (_context.Lans == null)
             {
                 return NotFound();
             }
-            var lan = await _context.Lan.FindAsync(id);
+            var lan = await _context.Lans.FindAsync(id);
             if (lan == null)
             {
                 return NotFound();
             }
 
-            _context.Lan.Remove(lan);
+            _context.Lans.Remove(lan);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -118,7 +113,7 @@ namespace api_adept.Controllers
 
         private bool LanExists(int id)
         {
-            return (_context.Lan?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Lans?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
