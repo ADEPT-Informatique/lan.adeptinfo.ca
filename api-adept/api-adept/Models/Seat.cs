@@ -1,7 +1,8 @@
-﻿namespace api_adept.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace api_adept.Models
 {
     public class Seat : BaseModel
-    {
         public virtual Lan Lan { get; set; }
 
         protected Seat() { /* Needed for EntityFramework */ }
