@@ -1,4 +1,5 @@
-﻿using api_adept.Models;
+﻿using api_adept.Core;
+using api_adept.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace api_adept.Context
@@ -10,6 +11,8 @@ namespace api_adept.Context
         public DbSet<Seat> Seats { get; set; }
 
         public DbSet<Participant> Participants { get; set; }
+
+        public DbSet<User> Users { get; set; }
 
         public AdeptLanContext(DbContextOptions<AdeptLanContext> options) : base(options)
         {
