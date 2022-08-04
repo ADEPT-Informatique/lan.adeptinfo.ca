@@ -1,0 +1,52 @@
+{
+	"env": {
+		"browser": true,
+		"amd": true,
+		"node": true
+	},
+	"rules": {
+		"semi": 2,
+		"unused-imports/no-unused-imports": "error",
+		"no-duplicate-imports": "error",
+		"import/no-duplicates": "error",
+		"no-invalid-this": 0,
+		"require-jsdoc": 0,
+		"valid-jsdoc": 0,
+		"new-cap": 0,
+		"max-len": 2,
+		"no-console": [
+			"error",
+			{
+				"allow": ["clear", "info", "error", "dir", "debug", "warn"]
+			}
+		],
+		"simple-import-sort/imports": "error",
+		"simple-import-sort/exports": "error"
+	},
+	"overrides": [
+		{
+			"files": ["*.ts"],
+			"rules": {
+				"simple-import-sort/imports": [
+					"error",
+					{
+						"groups": [
+							["^(@angular)(.*|$)", "^(rxjs)(.*|$)"],
+							["^(?!(@angular|rxjs|@empower|@core|@shared|@pages|@features)).*$"],
+							["^(@empower)(.*|$)"],
+							["^(@core)(.*|$)", "^(@shared)(.*|$)"],
+							["^(@pages)(.*|$)", "^(@features)(.*|$)"]
+						]
+					}
+				]
+			}
+		}
+	],
+	"extends": ["google", "eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
+	"plugins": ["@typescript-eslint", "html", "unused-imports", "simple-import-sort", "import"],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"sourceType": "module"
+	}
+}
