@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root',
 })
 export class UserService {
-
-  public isConnected():boolean{
-    // TODO
-    return true;
-  }
-
-  constructor() { }
+	public isConnected(): boolean {
+		// TODO
+		return true;
+	}
 }

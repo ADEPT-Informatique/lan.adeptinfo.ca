@@ -1,0 +1,17 @@
+{
+	"files.watcherExclude": {
+		"**/.git/**": true
+	},
+	"editor.formatOnPaste": false,
+	"editor.formatOnType": false,
+	"editor.formatOnSave": true,
+	"editor.insertSpaces": true,
+	"editor.tabSize": 2,
+	"editor.renderFinalNewline": true,
+	"editor.trimAutoWhitespace": true,
+	"editor.formatOnSaveMode": "file",
+	"editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+	"editor.codeActionsOnSave": {
+		"source.fixAll.tslint": true
+	}
+}
