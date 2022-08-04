@@ -24,23 +24,22 @@
 
 @media (max-width: 320px) {
   .btn-Participer {
-      margin-top: 6vh;
+    margin-top: 6vh;
   }
 }
 
 @media (max-width: 767px) {
-  #date  {
-      font-size: 1.75rem;
-      transition: font-size 0.5s;
+  #date {
+    font-size: 1.75rem;
+    transition: font-size 0.5s;
   }
   #lan {
-      font-size: 1.4rem;
-      transition: font-size 0.5s;
-
+    font-size: 1.4rem;
+    transition: font-size 0.5s;
   }
   .row {
-      font-size: 1em;
-      font-weight: bolder;
-      transition: font-size 0.5s;
+    font-size: 1em;
+    font-weight: bolder;
+    transition: font-size 0.5s;
   }
 }

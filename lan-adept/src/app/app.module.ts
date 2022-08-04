@@ -14,21 +14,21 @@ import { HomeComponent } from './pages/home/home.component';
 import { SeatsComponent } from './pages/seats/seats.component';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		CountdownComponent,
-		DatecountdownComponent,
-		HomeComponent,
-		SeatsComponent,
-		LoginComponent,
-		LogoutComponent,
-	],
-	imports: [
-		AngularFireModule.initializeApp(firebaseConfig),
-		AngularFireAuthModule, // auth
-		BrowserModule,
-		AppRoutingModule,
-	],
-	bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    CountdownComponent,
+    DatecountdownComponent,
+    HomeComponent,
+    SeatsComponent,
+    LoginComponent,
+    LogoutComponent,
+  ],
+  imports: [
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule, // auth
+    BrowserModule,
+    AppRoutingModule,
+  ],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
