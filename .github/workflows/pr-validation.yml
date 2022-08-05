@@ -1,11 +1,11 @@
-name: Pull Request Validation
+name: Front-End
 
 on:
   pull_request:
     branches: [ "dev" ]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -21,11 +21,17 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run lint
-  
-    - name: Run ESLint
-      # You may pin to the exact commit or the version.
-      # uses: stefanoeb/eslint-action@0b532bcd98dbed80a59071fa8986fcf1b1715be4
-      uses: stefanoeb/eslint-action@1.0.2
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lan-adept
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
       with:
-        # Blob of files to lint
-        files: src/app/*
+        cache-dependency-path: lan-adept/package-lock.json
+        node-version: 16.x
+        cache: 'npm'
+    - run: npm run build
