@@ -5,6 +5,6 @@ namespace api_adept.Models
     public abstract class BaseModel
     {
         [Key]
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
     }
 }

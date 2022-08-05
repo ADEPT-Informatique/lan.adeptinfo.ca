@@ -1,6 +1,5 @@
 ﻿namespace api_adept.Models
 {
-    #nullable disable
     public class Reservation: BaseModel
     {
         public DateTime Date { get; set; } = DateTime.Now;
