@@ -8,21 +8,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    defaults:
+      run:
+        working-directory: lan-adept
     steps:
     - uses: actions/checkout@v3
-    - run: cd lan-adept
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 16.x
         cache: 'npm'
-    - run: cd lan-adept
     - run: npm ci
     - run: npm run lint
   
