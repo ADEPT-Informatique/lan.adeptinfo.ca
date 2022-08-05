@@ -19,6 +19,7 @@ jobs:
         cache-dependency-path: lan-adept/package-lock.json
         node-version: 16.x
         cache: 'npm'
+    - run: npm ci
     - run: npm run lint
   build:
     runs-on: ubuntu-latest
