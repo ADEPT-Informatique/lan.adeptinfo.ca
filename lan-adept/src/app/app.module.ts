@@ -3,7 +3,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { firebaseConfig } from '../environments/environment';
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './pages/auth/login/login.component';
@@ -24,7 +24,7 @@ import { SeatsComponent } from './pages/seats/seats.component';
     LogoutComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, // auth
     BrowserModule,
     AppRoutingModule,
