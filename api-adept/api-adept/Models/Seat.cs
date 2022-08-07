@@ -11,6 +11,8 @@ namespace api_adept.Models
         
         public string Place => $"{Section}{Number}";
 
+        public bool IsTaken => Reservation != null;
+
         public virtual Lan Lan { get; set; }
         public virtual Reservation Reservation { get; set; }
 
