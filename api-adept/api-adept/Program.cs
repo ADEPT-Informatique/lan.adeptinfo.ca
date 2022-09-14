@@ -1,4 +1,5 @@
-using api_adept.Context;
+﻿using api_adept.Context;
+using api_adept.LIBRARY.Middleware;
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
@@ -23,9 +24,12 @@ var app = builder.Build();
 var defaultApp = FirebaseApp.Create(new AppOptions()
 {
     Credential = GoogleCredential.FromFile("../service-account-file.json"),
+    ProjectId = "adept-api"
 });
 
 var defaultAuth = FirebaseAuth.GetAuth(defaultApp);
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -38,6 +42,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 

@@ -1,9 +1,6 @@
-﻿using ADEPT_API.DATACONTptions.Interface;
-using Microsoft.AspNetCore.Http;
+﻿using api_adept.Models.Errors;
 using Newtonsoft.Json;
-using System;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace api_adept.LIBRARY.Middleware
 {

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace api_adept.Services
 {
 
-    public class UsersService
+    public class UsersService : IUsersService
     {
         public DbSet<User> users { get; }
         public UsersService(AdeptLanContext adeptContext)

@@ -1,7 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Linq;
+﻿using api_adept.Services;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace api_adept.Core
 {
@@ -13,14 +11,14 @@ namespace api_adept.Core
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context, IAuthRepository authRepository)
+        public async Task Invoke(HttpContext context, IUsersService authService)
         {
             //On trouve le User à partir du UserId de Firebase
 
             ClaimsPrincipal user = context.User;
             string id = user.Claims.FirstOrDefault(x => x.Type.ToUpper() == "USER_ID")?.Value;
 
-            User authenticatedUser = await authRepository.GetFirstOrDefaultAsync(x => x.FireBaseID == id);
+            User authenticatedUser = await authService.Get(x => x.FireBaseID == id);
             context.Items["User"] = authenticatedUser;
 
             await _next(context);
