@@ -1,4 +1,5 @@
-﻿using api_adept.Services;
+﻿using api_adept.Models;
+using api_adept.Services;
 using System.Security.Claims;
 
 namespace api_adept.Core
@@ -18,7 +19,7 @@ namespace api_adept.Core
             ClaimsPrincipal user = context.User;
             string id = user.Claims.FirstOrDefault(x => x.Type.ToUpper() == "USER_ID")?.Value;
 
-            User authenticatedUser = await authService.Get(x => x.FireBaseID == id);
+            User authenticatedUser = authService.GetByFirebaseId(id);
             context.Items["User"] = authenticatedUser;
 
             await _next(context);

@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System.Net;
 
-namespace api_adept.LIBRARY.Middleware
+namespace api_adept.Core
 {
     public class ExceptionMiddleware
     {

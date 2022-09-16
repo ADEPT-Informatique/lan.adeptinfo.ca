@@ -1,24 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using api_adept.Models;
+using api_adept.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Web.Http.Filters;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace api_adept.Controllers
 {
-    [Route("api/users")]
+    [Authorize]
     [ApiController]
-    public class UsersController : ControllerBase
+    [Route("api/users")]
+    public class UsersController : AdeptController
     {
-        // GET: api/<UsersController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        public UsersController(IUsersService userService) : base(userService)
         {
-            return new string[] { "value1", "value2" };
         }
+
         // GET: api/users/me
         [HttpGet("me")]
-        public IEnumerable<string> Me()
+        public User Me()
         {
-            return new string[] { "ME MYSELF AND i" };
+            return User;
         }
 
         // GET api/<UsersController>/5
@@ -30,13 +35,16 @@ namespace api_adept.Controllers
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void SignUp([FromBody] User value)
         {
+            value.Id = Guid.Empty;
+            value.FirebaseId = UserFirebaseId;
+            this._usersService.SignUp(value);
         }
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] string value)
+        public void Put(Guid id, [FromBody] User value)
         {
         }
 

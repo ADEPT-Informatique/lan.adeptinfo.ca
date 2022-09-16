@@ -1,5 +1,4 @@
-﻿using api_adept.Core;
-using api_adept.Models;
+﻿using api_adept.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace api_adept.Context

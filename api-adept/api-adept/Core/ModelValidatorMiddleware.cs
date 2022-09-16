@@ -2,18 +2,18 @@
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 
-namespace ADEPT_API.LIBRARY.Middleware
+namespace api_adept.Core
 {
-  public static class ModelValidatorMiddleware
-  {
-    public static IActionResult ValidateModelState(ActionContext context)
+    public static class ModelValidatorMiddleware
     {
-      (string fieldName, ModelStateEntry errorEntry) = context.ModelState.FirstOrDefault(kvp => kvp.Value.Errors.Count > 0);
+        public static IActionResult ValidateModelState(ActionContext context)
+        {
+            (string fieldName, ModelStateEntry errorEntry) = context.ModelState.FirstOrDefault(kvp => kvp.Value.Errors.Count > 0);
 
-      var serializedErrorMessage = errorEntry.Errors.First().ErrorMessage;
-      var badRequestObject = JsonConvert.DeserializeObject(serializedErrorMessage);
+            var serializedErrorMessage = errorEntry.Errors.First().ErrorMessage;
+            var badRequestObject = JsonConvert.DeserializeObject(serializedErrorMessage);
 
-      return new BadRequestObjectResult(badRequestObject);
+            return new BadRequestObjectResult(badRequestObject);
+        }
     }
-  }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api_adept.Context;
 
@@ -11,13 +12,14 @@ using api_adept.Context;
 namespace api_adept.Migrations
 {
     [DbContext(typeof(AdeptLanContext))]
-    partial class AdeptLanContextModelSnapshot : ModelSnapshot
+    [Migration("20220916042252_Users")]
+    partial class Users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -117,11 +119,36 @@ namespace api_adept.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(1)");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("LanId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Seats");
+                });
+
+            modelBuilder.Entity("api_adept.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirebaseId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("api_adept.Models.Participant", b =>
@@ -156,6 +183,10 @@ namespace api_adept.Migrations
                         .WithMany("Seats")
                         .HasForeignKey("LanId");
 
+                    b.HasOne("api_adept.Models.User", null)
+                        .WithMany("seats")
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Lan");
                 });
 
@@ -169,6 +200,11 @@ namespace api_adept.Migrations
             modelBuilder.Entity("api_adept.Models.Seat", b =>
                 {
                     b.Navigation("Reservation");
+                });
+
+            modelBuilder.Entity("api_adept.Models.User", b =>
+                {
+                    b.Navigation("seats");
                 });
 #pragma warning restore 612, 618
         }
