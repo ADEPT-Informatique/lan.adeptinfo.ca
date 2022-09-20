@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { CanActivate } from "@angular/router";
-import { filter, firstValueFrom, from, Observable, of, switchMap } from "rxjs";
+import { filter, firstValueFrom, from, of, switchMap } from "rxjs";
 import { AuthService } from "../services/auth.service";
 
 @Injectable({
