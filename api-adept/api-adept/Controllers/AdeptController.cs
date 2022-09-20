@@ -13,7 +13,7 @@ namespace api_adept.Controllers
         {
             get
             {
-                var id = HttpContext.User.Claims.FirstOrDefault(a => a.Type == "user_id")?.Value;
+                var id = UserFirebaseId;
                 if (!string.IsNullOrWhiteSpace(id))
                 {
                     User user = this._usersService.GetByFirebaseId(id);

@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
   version: '0.0.1',
-  apiUrl: 'http://adeptinfo.ca:8000/',
+  apiUrl: 'https://localhost:7290/',
   playerUrl: 'https://lan.adeptinfo.ca',
   grantType: 'password',
   clientId: 2,

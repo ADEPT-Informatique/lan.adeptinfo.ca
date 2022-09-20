@@ -7,25 +7,31 @@
       <ul class="nav-menu sf-js-enabled sf-arrows" style="touch-action: pan-y">
         <li class="menu-active d-block d-sm-none"><a href="#">Accueil</a></li>
         <li><a href="places">Places</a></li>
-        <li *ngIf="!this.userService.isConnected()">
-          <a href="/auth/login">Se connecter</a>
-        </li>
-        <li *ngIf="this.userService.isConnected()">
-          <a href="/auth/logout">Se déconnecter</a>
-        </li>
-        <li *ngIf="!this.userService.isConnected()">
-          <a href="/auth/register">Création Compte</a>
-        </li>
+        <ng-container *ngIf="!this.authService.isLoggedIn">
+          <li>
+            <a href="/auth/login">Se connecter</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="this.authService.isLoggedIn">
+          <li>
+            <a
+              [routerLink]="['/auth/profile']"
+              routerLinkActive="router-link-active"
+            >
+              Profile
+            </a>
+          </li>
+          <li>
+            <a (click)="this.authService.logout()"> Se déconnecter </a>
+          </li>
+        </ng-container>
       </ul>
     </nav>
   </div>
 </header>
-<div class="Background">
-  <div class="Veil">
-    <div class="Container">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+<div id="background-wallpaper"></div>
+<div class="Container">
+  <router-outlet></router-outlet>
 </div>
 <footer id="footer">
   <div class="footer-top">

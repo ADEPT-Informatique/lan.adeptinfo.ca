@@ -16,7 +16,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowedOrigins",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // note the port is included 
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 
 // Add Database
@@ -46,6 +55,8 @@ app.UseAuthorization();
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
+
+app.UseCors("MyAllowedOrigins");
 
 app.Run();
 
@@ -81,10 +92,4 @@ void AddAdeptAuth(IServiceCollection services)
             ValidAudience = "lan-adept"
         };
     });
-    //builder.Services.AddTransient<IFirebaseAuthAdapter>(provider =>
-    //{
-    //    var googleCredential = GoogleCredential.FromFile("firebase-auth.json");
-    //    return new FirebaseAuthAdapter(googleCredential, "adept-api");
-    //});
-    //builder.Services.AddTransient<IFirebaseAuthManager, FirebaseAuthManager>();
 }
