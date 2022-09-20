@@ -46,12 +46,14 @@ namespace api_adept.Controllers
         [HttpPut("{id}")]
         public void Put(Guid id, [FromBody] User value)
         {
+            throw new NotImplementedException();
         }
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            throw new NotImplementedException();
         }
     }
 }
