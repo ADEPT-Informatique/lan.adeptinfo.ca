@@ -8,6 +8,6 @@ import { UserService } from '../../core/services/user.service';
 })
 export class SeatsComponent {
   constructor(public userService: UserService) {
-    (window as any)?.PretixWidget?.open('https://pretix.eu/adept/test/');
+    // (window as any)?.PretixWidget?.open('https://pretix.eu/adept/test/');
   }
 }
