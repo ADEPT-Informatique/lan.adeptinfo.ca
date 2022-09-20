@@ -31,7 +31,7 @@ import { AuthInterceptor } from "./core/interceptors/auth.interceptor";
     ProfileComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule, // auth
     BrowserModule,
     HttpClientModule,
