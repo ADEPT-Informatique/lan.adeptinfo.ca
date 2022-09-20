@@ -11,15 +11,5 @@ export const environment = {
     measurementId: 'G-SR7YERVNEL',
   },
   production: false,
-  version: '0.0.1',
   apiUrl: 'https://localhost:7290/',
-  playerUrl: 'https://lan.adeptinfo.ca',
-  grantType: 'password',
-  clientId: 2,
-  clientSecret: 'IJqYSIikfFX8xvL2HMyAkUiJx0iRgNiqQwjGZBs3',
-  seatsIoPublicKey: '',
-  seatsIoBasePath: 'https://api.seatsio.net',
-  googleClientId: '73190348589-0qq14la3nuva5s5peoqh14q2ba6p292l.apps.googleusercontent.com',
-  googleMapsApiKey: 'AIzaSyAg0g9i-DiREaa6b3oYhkhDCaP82njdkWo',
-  facebookAppId: '2169843556633882'
 };
