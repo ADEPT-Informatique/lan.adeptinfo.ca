@@ -23,7 +23,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     CountdownComponent,
     DatecountdownComponent,
     HomeComponent,
-    SeatsComponent,
     LoginComponent,
     LogoutComponent
 
