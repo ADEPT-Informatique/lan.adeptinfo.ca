@@ -4,5 +4,5 @@ export class User {
   displayName!: string;
   photoURL!: string;
   emailVerified!: boolean;
-  seats!: string[];
+  seats?: string[];
 }
