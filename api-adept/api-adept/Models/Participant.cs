@@ -10,5 +10,7 @@ namespace api_adept.Models
         public string LastName { get; set; }
 
         public string Email { get; set; }
+
+        public virtual Reservation Reservation { get; set; }
     }
 }

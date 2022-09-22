@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "lan-adept": {
+      "hosting": {
+        "lan-adept": [
+          "lan-adept"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "lan-adept"
+  }
+}

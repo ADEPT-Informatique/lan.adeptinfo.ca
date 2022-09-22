@@ -1,8 +1,12 @@
-using api_adept.Context;
+﻿using api_adept.Context;
+using api_adept.Core;
+using api_adept.Services;
 using FirebaseAdmin;
 using FirebaseAdmin.Auth;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,20 +16,29 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyAllowedOrigins",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // note the port is included 
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
 // Add Database
 builder.Services.AddDbContext<AdeptLanContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("AdeptLanDatabase"));
 });
 
+AddAdeptServices(builder.Services);
+AddAdeptAuth(builder.Services);
+
+
 var app = builder.Build();
-
-var defaultApp = FirebaseApp.Create(new AppOptions()
-{
-    Credential = GoogleCredential.FromFile("../service-account-file.json"),
-});
-
-var defaultAuth = FirebaseAuth.GetAuth(defaultApp);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -39,6 +52,44 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseMiddleware<ExceptionMiddleware>();
+
 app.MapControllers();
 
+app.UseCors("MyAllowedOrigins");
+
 app.Run();
+
+
+
+
+void AddAdeptServices(IServiceCollection services)
+{
+    services.AddTransient<IUsersService, UsersService>();
+}
+
+void AddAdeptAuth(IServiceCollection services)
+{
+    var defaultApp = FirebaseApp.Create(new AppOptions()
+    {
+        Credential = GoogleCredential.FromFile("./service-account-file.json")
+    });
+
+    var defaultAuth = FirebaseAuth.GetAuth(defaultApp);
+
+
+    builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt =>
+    {
+        opt.Authority = "https://securetoken.google.com/lan-adept";
+        opt.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "https://securetoken.google.com/lan-adept",
+            ValidAudience = "lan-adept"
+        };
+    });
+}

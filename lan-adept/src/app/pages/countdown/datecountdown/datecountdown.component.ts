@@ -1,27 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-datecountdown',
   templateUrl: './datecountdown.component.html',
-  styleUrls: ['./datecountdown.component.scss']
+  styleUrls: ['./datecountdown.component.scss'],
 })
-export class DatecountdownComponent implements OnInit {
-  date: any = new Date("Mar 20, 2023 12:00:00");
+export class DatecountdownComponent implements AfterViewInit {
+  date: any = new Date('Mar 20, 2023 12:00:00');
   days: number = this.getDays();
   hours: number = this.getHours();
   minutes: number = this.getMinutes();
   seconds: number = this.getSeconds();
 
-  constructor() { }
-
-  ngOnInit(): void {
-
-  }
-
   ngAfterViewInit(): void {
     const ticker = interval(1000);
-    ticker.subscribe(_ => {
+    ticker.subscribe((_) => {
       this.days = this.getDays();
       this.hours = this.getHours();
       this.minutes = this.getMinutes();
@@ -30,26 +24,26 @@ export class DatecountdownComponent implements OnInit {
   }
 
   getDate() {
-    return this.date.toLocaleDateString("fr-fr", { hour: "2-digit", minute: "2-digit" })
+    return this.date.toLocaleDateString('fr-fr', { hour: '2-digit', minute: '2-digit' });
   }
   getDays() {
-    let now = new Date().getTime();
-    let distance = this.date - now;
-    return Math.floor(distance % (1000 * 60 * 60 * 24 * 365.25) / (1000 * 60 * 60 * 24));
+    const now = new Date().getTime();
+    const distance = this.date - now;
+    return Math.floor((distance % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
   }
   getHours() {
-    let now = new Date().getTime();
-    let distance = this.date - now;
+    const now = new Date().getTime();
+    const distance = this.date - now;
     return Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   }
   getMinutes() {
-    let now = new Date().getTime();
-    let distance = this.date - now;
+    const now = new Date().getTime();
+    const distance = this.date - now;
     return Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   }
   getSeconds() {
-    let now = new Date().getTime();
-    let distance = this.date - now;
+    const now = new Date().getTime();
+    const distance = this.date - now;
     return Math.floor((distance % (1000 * 60)) / 1000);
   }
 }

@@ -80,35 +80,32 @@
           },
           "defaultConfiguration": "development"
         },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+        "deploy": {
+          "builder": "@angular/fire:deploy",
           "options": {
-            "browserTarget": "lan-adept:build"
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "lan-adept:build:production",
+            "firebaseProject": "lan-adept",
+            "firebaseHostingSite": "lan-adept"
           }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.scss"
-            ],
-            "scripts": []
+            "configFile": ".eslintrc.json",
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "lan-adept",
   "cli": {
-    "analytics": "cf70f3ce-32b7-4ef7-8322-c17fb4b128dd"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

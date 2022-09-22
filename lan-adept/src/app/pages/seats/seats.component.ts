@@ -9,24 +9,6 @@ import { UserService } from '../../core/services/user.service';
   styleUrls: ['./seats.component.scss'],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
-export class SeatsComponent implements OnInit {
-
-  config = {
-    publicKey: "19aa9acc-c576-465e-bcbf-28738cb997a4",
-    event: "a2e58f40-980f-4b4f-9c1c-ec7098727e7a",
-    fitTo: 'width',
-    style: { font: 'Roboto', border: 'max', padding: 'spacious' },
-    features: {
-      disabled: ['booths', 'tables']
-    },
-    maxSelectedObjects: 1,
-    selectedObjectsInputName: 'selectedSeat'
-  }
-
-  constructor(public userService:UserService) { }
-
-
-  ngOnInit(): void {
-  }
-
+export class SeatsComponent {
+  constructor(public userService: UserService) {}
 }
