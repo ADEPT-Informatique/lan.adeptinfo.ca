@@ -2,7 +2,7 @@ name: Front-End
 
 on:
   pull_request:
-    branches: [ "dev" ]
+    branches: ["dev"]
 
 jobs:
   lint:
@@ -11,27 +11,29 @@ jobs:
       run:
         working-directory: lan-adept
     steps:
-    - uses: actions/checkout@v3
-    - run: ls
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        cache-dependency-path: lan-adept/package-lock.json
-        node-version: 16.x
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run lint
+      - uses: actions/checkout@v3
+      - run: ls
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          cache-dependency-path: lan-adept/package-lock.json
+          node-version: 16.x
+          cache: "npm"
+      - run: npm ci
+      - run: npm run lint
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        cache-dependency-path: lan-adept/package-lock.json
-        node-version: 16.x
-        cache: 'npm'
-    - run: ls
-    - run: ls lan-adept
-    - run: npm ci
-    - run: npm run build
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          cache-dependency-path: lan-adept/package-lock.json
+          node-version: 16.x
+          cache: "npm"
+      - run: ls lan-adept
+      - run: |
+          cd lan-adept
+          npm ci
+
+      - run: npm run build
