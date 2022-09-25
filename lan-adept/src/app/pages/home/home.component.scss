@@ -1,22 +1,37 @@
-#welcome {
-  font-size: 3rem;
-  font-weight: bolder;
-}
+.welcome {
+  height: calc(100vh - 92px);
+  z-index: 1;
 
-#welcome-description {
-  margin-top: 5vh;
-  font-size: 1.25rem;
-  font-weight: bolder;
-  color: #d4af37;
-}
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-@media (max-width: 767px) {
-  #welcome {
-    font-size: 1.15em;
+  padding: 8px;
+
+  > * {
+    margin-bottom: 24px;
+  }
+
+  .welcome-title {
+    font-size: 3rem;
     font-weight: bolder;
   }
-  #welcome-description {
-    font-size: 0.95em;
+
+  .welcome-description {
+    margin-top: 5vh;
+    font-size: 1.25rem;
     font-weight: bolder;
+    color: #d4af37;
+  }
+
+  @media (max-width: 767px) {
+    .welcome-title {
+      font-size: 1.15em;
+      font-weight: bolder;
+    }
+    .welcome-description {
+      font-size: 0.95em;
+      font-weight: bolder;
+    }
   }
 }

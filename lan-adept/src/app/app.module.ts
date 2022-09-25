@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CountdownComponent } from './pages/countdown/countdown/countdown.component';
-import { DatecountdownComponent } from './pages/countdown/datecountdown/datecountdown.component';
+import { CountdownComponent } from './pages/countdown/countdown.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SeatsComponent } from './pages/seats/seats.component';
 import { LoginComponent } from './pages/auth/login/login.component';
@@ -23,7 +22,6 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
   declarations: [
     AppComponent,
     CountdownComponent,
-    DatecountdownComponent,
     HomeComponent,
     SeatsComponent,
     LoginComponent,
