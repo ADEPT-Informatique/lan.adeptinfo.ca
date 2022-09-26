@@ -1,7 +1,6 @@
 ﻿using api_adept.Context;
 using api_adept.Models;
 using api_adept.Models.Errors;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 
@@ -10,14 +9,12 @@ using System.Net;
 namespace api_adept.Services
 {
 
-    public class UsersService : IUsersService
+    public class UsersService : AdeptService, IUsersService
     {
         private DbSet<User> users { get; }
-        private AdeptLanContext adeptContext { get; }
-        public UsersService(AdeptLanContext adeptContext)
+        public UsersService(AdeptLanContext adeptContext) : base(adeptContext)
         {
             users = adeptContext.Users;
-            this.adeptContext = adeptContext;
 
         }
 
@@ -47,7 +44,7 @@ namespace api_adept.Services
             else
             {
                 User output = this.users.Add(value).Entity;
-                this.saveChanges();
+                this.SaveChanges();
                 return output;
             }
         }
@@ -78,11 +75,6 @@ namespace api_adept.Services
                 this.users.Update(user);
             }
 
-        }
-
-        private void saveChanges()
-        {
-            this.adeptContext.SaveChanges();
         }
     }
 }

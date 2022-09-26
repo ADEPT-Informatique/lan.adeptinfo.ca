@@ -1,0 +1,26 @@
+@mixin tablet-max {
+  @media screen and (max-width: 768) {
+    @content;
+  }
+}
+
+@mixin mobile-max {
+  @media screen and (max-width: 425px) {
+    @content;
+  }
+}
+
+@mixin button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  color: #fff;
+  background-color: #10d213;
+
+  width: 250px;
+  padding: 15px 30px;
+  border-radius: 15px;
+
+  &:hover {
+    background-color: #10a22a !important;
+  }
+}

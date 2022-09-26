@@ -66,6 +66,7 @@ app.Run();
 void AddAdeptServices(IServiceCollection services)
 {
     services.AddTransient<IUsersService, UsersService>();
+    services.AddTransient<ILanService, LanService>();
 }
 
 void AddAdeptAuth(IServiceCollection services)
