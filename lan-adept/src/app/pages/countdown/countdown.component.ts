@@ -30,7 +30,7 @@ export class CountdownComponent {
     });
   }
 
-  getCurrentDate(): Date | null {
+  protected getCurrentDate(): Date | null {
     if (this.currentLan !== undefined) {
       const startingDate = this.currentLan.date;
 
@@ -42,17 +42,17 @@ export class CountdownComponent {
     return null;
   }
 
-  getDate() {
+  protected getDate() {
     const currentDate = this.getCurrentDate();
 
     if (currentDate == null) {
       return "Le LAN est terminé! Rendez-vous au prochain.";
     }
 
-    return currentDate.toLocaleDateString("fr-fr", { hour: "2-digit", minute: "2-digit" });
+    return currentDate.getTime();
   }
 
-  getDays() {
+  private getDays() {
     const currentDate = this.getCurrentDate();
 
     if (currentDate == null) {
@@ -64,7 +64,8 @@ export class CountdownComponent {
 
     return Math.floor((distance % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
   }
-  getHours() {
+
+  private getHours() {
     const currentDate = this.getCurrentDate();
 
     if (currentDate == null) {
@@ -75,7 +76,8 @@ export class CountdownComponent {
     let distance = currentDate.getTime() - now;
     return Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   }
-  getMinutes() {
+
+  private getMinutes() {
     const currentDate = this.getCurrentDate();
 
     if (currentDate == null) {
@@ -86,7 +88,8 @@ export class CountdownComponent {
     let distance = currentDate.getTime() - now;
     return Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   }
-  getSeconds() {
+
+  private getSeconds() {
     const currentDate = this.getCurrentDate();
 
     if (currentDate == null) {

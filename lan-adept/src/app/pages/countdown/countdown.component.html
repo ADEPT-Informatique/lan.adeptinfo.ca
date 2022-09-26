@@ -1,11 +1,17 @@
 <div id="countdown">
-  <div class="lan-home-background"></div>
   <div *ngIf="getCurrentDate()">
     <h3 class="col-xl-6 col-md-10 col-sm-8 col-12 ml-auto mr-auto">
       <div
         class="row"
         style="color: white"
       >
+        <div
+          class="col-12"
+          style="margin-bottom: 20px"
+        >
+          Le prochain LAN aura lieu le
+          <span style="font-weight: bold">{{ getDate() | date: "medium" }}</span>
+        </div>
         <div class="col-md-3 col-6">
           <div class="col-12">{{ days }}</div>
           <div *ngIf="days > 1">Jours</div>

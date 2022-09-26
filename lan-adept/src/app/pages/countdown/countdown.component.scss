@@ -1,9 +1,5 @@
 @import "~src/assets/common/_mixins.scss";
 
-.row > * {
-  padding: 0 5px;
-}
-
 .btn-participer {
   @include button;
 

@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
+import { Functions } from "src/app/shared";
 import { environment } from "src/environments/environment";
 import { Lan } from "../models/lan";
 
@@ -12,17 +13,11 @@ export class LanService {
 
   constructor(private _httpClient: HttpClient) {}
 
-  public getCurrentLan = (): Observable<Lan> => {
+  public getCurrentLan(): Observable<Lan> {
     return this._httpClient.get<Lan>(`${this.BASE_URL}/current`).pipe(
       map((lan) => {
-        return this.buildLanFromRawResponse(lan);
+        return Functions.buildLanFromRawResponse(lan);
       }),
     );
-  };
-
-  private buildLanFromRawResponse = (response: any): Lan => {
-    const date = response.date;
-
-    return new Lan(response.session, new Date(date));
-  };
+  }
 }
