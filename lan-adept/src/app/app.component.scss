@@ -1,0 +1,21 @@
+.app-container {
+  text-align: center;
+  margin-top: 90px;
+  z-index: 1;
+}
+
+.lan-home-background {
+  background-image: url("../assets/img/LanHome.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: transparent;
+  background-size: cover;
+  min-height: 100vh;
+  width: 100vw;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  filter: blur(5px);
+}

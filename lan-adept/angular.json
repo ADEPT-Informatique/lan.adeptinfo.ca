@@ -109,6 +109,6 @@
     "schematicCollections": [
       "@angular-eslint/schematics"
     ],
-    "analytics": "2b3317be-f4e0-4a50-8390-58d5c8a65a32"
+    "analytics": false
   }
 }

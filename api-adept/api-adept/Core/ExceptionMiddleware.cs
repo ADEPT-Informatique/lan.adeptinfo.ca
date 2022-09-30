@@ -33,7 +33,7 @@ namespace api_adept.Core
                 else
                 {
                     contextResponse.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    error = new Error { ErrorCode = "ERR_UNHANDLED", Message = "Unhandled Error", Stacktrace = "Unhandled Error" };
+                    error = new Error { ErrorCode = "ERR_UNHANDLED", Message = exception.Message, Stacktrace = exception.StackTrace };
                 }
 
                 await contextResponse.WriteAsync(JsonConvert.SerializeObject(error));

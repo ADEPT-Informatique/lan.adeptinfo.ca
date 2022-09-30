@@ -3,17 +3,15 @@
     public class Lan : BaseModel
     {
         public DateTime Date { get; set; }
-        public virtual ISet<Seat> Seats { get; set; }
-        public virtual ISet<Reservation> Reservations { get; set; }
+        public virtual ISet<Seat> Seats { get; set; } = new HashSet<Seat>();
         public string Session { get; set; }
 
         protected Lan() { /* Needed for EntityFramework */ }
 
-        public Lan(string session)
+        public Lan(DateTime date, String session)
         {
-            Seats = new HashSet<Seat>();
-            Reservations = new HashSet<Reservation>();
-            Session = session;
+            this.Date = date;
+            this.Session = session;
         }
     }
 }
