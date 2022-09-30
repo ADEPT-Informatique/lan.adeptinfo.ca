@@ -33,7 +33,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/eventBriteRegister.js"
+            ]
           },
           "configurations": {
             "production": {

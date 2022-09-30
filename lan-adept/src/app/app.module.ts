@@ -26,7 +26,6 @@ registerLocaleData(localeFr);
     AppComponent,
     CountdownComponent,
     HomeComponent,
-    SeatsComponent,
     LoginComponent,
     LogoutComponent,
     ProfileComponent,
