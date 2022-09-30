@@ -1,4 +1,3 @@
-
 <!--<div id="container" class="col-10 offset-1">
 
   <h1>Places disponibles</h1>
@@ -7,13 +6,29 @@
   <button *ngIf="this.userService.isConnected()" mat-raised-button color="primary" id="btn-confirmSeat" style="color:white;">Confirmer sa place</button>
   </form>
 </div> -->
-<pretix-widget event="https://pretix.eu/adept/test/"></pretix-widget>
-<noscript>
-   <div class="pretix-widget">
-        <div class="pretix-widget-info-message">
-            JavaScript is disabled in your browser. To access our ticket shop without JavaScript,
-            please <a target="_blank" href="https://pretix.eu/demo/democon/">click here</a>.
-        </div>
-    </div>
-</noscript>
-<button>test</button>
+<noscript
+  ><a
+    href="https://www.eventbrite.com/e/billets-lan-de-ladept-428949488467"
+    rel="noopener noreferrer"
+    target="_blank"
+    >Obtenez votre ticket ici!</a
+  ></noscript
+>
+<div *ngIf="this.deviceService.isMobile()">
+  <p class="white">
+    Cette partie du site n'est pas faite pour un appareil mobile. Voici un bouton qui vous redirige directement sur la
+    page de l'événement.
+  </p>
+  <!-- You can customize this button any way you like -->
+  <button
+    id="eventbrite-widget-modal-trigger-428949488467"
+    type="button"
+  >
+    Obtenez votre ticket
+  </button>
+</div>
+
+<div
+  class="col-sm-6 offset-3"
+  id="eventbrite-widget-container-428949488467"
+></div>

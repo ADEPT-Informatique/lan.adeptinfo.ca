@@ -22,6 +22,7 @@
     "@angular/router": "^14.1.0",
     "@types/angularfire": "^0.8.34",
     "firebase": "^9.9.1",
+    "ngx-device-detector": "^4.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
